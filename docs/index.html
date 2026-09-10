@@ -139,6 +139,41 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr.total td{background:#DFE3DB;font-weight:700}
 tr.win td{background:#F3F6F0;font-weight:700}
 .sub{display:block;font-size:11.5px;font-weight:400;color:var(--muted);line-height:1.3;margin-top:1px}
+
+/* Anliegen und Suchhinweis */
+.anliegen{margin-top:11px}
+.anliegen .ah{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);
+  text-transform:none;margin-bottom:4px}
+.anliegen ul{margin:0;padding:0;list-style:none}
+.anliegen li{font-size:13.8px;line-height:1.4;padding:3px 0 3px 15px;position:relative;color:var(--ink)}
+.anliegen li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+  border-radius:1px;background:var(--ink);opacity:.5}
+.tipp{margin-top:13px;background:#F4F6F2;border:1px solid var(--rule);border-radius:2px;
+  padding:10px 13px;font-size:13.2px;line-height:1.45;color:var(--muted);max-width:64ch}
+.tipp b{display:block;color:var(--ink);font-size:11.5px;letter-spacing:.04em;margin-bottom:3px}
+.role{align-items:flex-start}
+.role .mono{margin-top:2px}
+.rolecard .anliegen li{font-size:13px;padding-left:14px}
+.rolecard .anliegen li::before{top:8px;width:6px;height:6px}
+
+.choose .cfull{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.3}
+.choose .cs{font-size:12.2px;color:var(--ink);margin-top:8px;line-height:1.4}
+
+/* Nachschlagen */
+details.ref{margin-top:16px;background:var(--sheet);border:1px solid var(--rule);border-radius:2px}
+details.ref summary{padding:12px 18px;font-weight:700;font-size:14.5px;cursor:pointer;
+  list-style:none;display:flex;align-items:center;gap:9px}
+details.ref summary::-webkit-details-marker{display:none}
+details.ref summary::before{content:"+";font-size:17px;color:var(--muted);width:14px;line-height:1}
+details.ref[open] summary::before{content:"–"}
+.refgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:4px 18px 18px}
+.refcol h4{margin:0 0 6px;font-size:14px;color:var(--c);letter-spacing:-0.02em}
+.refcol ul{margin:0;padding:0;list-style:none}
+.refcol li{font-size:12.5px;line-height:1.28;padding:5px 0;border-top:1px solid var(--rule)}
+.refcol li b{color:var(--c);font-size:10.5px;margin-right:5px}
+.refcol li i{display:block;font-style:normal;font-size:11px;color:var(--muted)}
+@media (max-width:980px){ .refgrid{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:640px){ .refgrid{grid-template-columns:repeat(2,1fr)} }
 .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;background:var(--c)}
 
 .step{border-top:2px solid var(--ink);padding-top:17px;margin-top:34px}
@@ -285,6 +320,10 @@ tr.win td{background:#F3F6F0;font-weight:700}
     <p class="small muted max70">In einer Klasse von 18: jede Rollenkarte dreimal vergeben. Nach der
     Wahl vergleichen, was die drei Anna-Spielenden angekreuzt haben.</p>
     <div class="rolegrid" id="rolegrid"></div>
+    <div class="notice"><b>Es gibt keine richtige Lösung.</b> Jede Rolle bringt drei Anliegen mit,
+    die selten alle auf dieselbe Liste passen. Genau dieses Abwägen ist die Aufgabe – und der Grund,
+    warum drei Personen mit derselben Rolle unterschiedlich wählen können. Im Wahllokal steht zu jeder
+    Rolle zusätzlich ein Hinweis, wonach sich unter den einundzwanzig Kandidierenden suchen lässt.</div>
     <div class="btn-row">
       <button class="btn" id="go-vote">Wahllokal öffnen</button>
       <button class="btn-ghost" id="go-demo">Alle 18 zufällig wählen lassen</button>
@@ -362,14 +401,68 @@ const LISTS = [
     ]}
 ];
 
-/* Sechs Rollen – jede wird dreimal gespielt */
+/* Sechs Rollen – jede wird dreimal gespielt.
+   "anliegen" nennt Prioritäten, keine Parteien. Das Zuordnen ist die Aufgabe. */
 const ROLES = [
-  ["Anna Vieira","19, Detailhandelsfachfrau im ersten Jahr. Wohnt bei den Eltern beim Bahnhof, sucht seit Monaten eine eigene Wohnung. Wählt zum ersten Mal."],
-  ["Werner Hofstetter","61, Chef einer Schreinerei in Tannmatt mit zwölf Angestellten. Findet seit drei Jahren keine Lernenden mehr und ärgert sich über die Bauvorschriften."],
-  ["Rosmarie Gerber","73, Bäuerin im Hasental, hat den Hof an ihre Tochter übergeben. Der Bus ins Dorf fährt noch dreimal am Tag, die Poststelle ist zu."],
-  ["Ramesh Thangarajah","39, Ingenieur bei der Papierfabrik in Riedern. Der Betrieb hat Kurzarbeit angemeldet, zwei Kinder gehen hier zur Schule."],
-  ["Isabelle Renaud","44, Winzerin am Tannsee bei Val-Riond. Der letzte Sommer war zu heiss und zu trocken, die Ernte fiel um ein Drittel kleiner aus."],
-  ["Nadia Ghebremariam","24, Fachfrau Betreuung im Altersheim Tannmatt, Schichtdienst. Vor zwei Jahren eingebürgert und deshalb neu stimmberechtigt."]
+  { name:"Anna Vieira",
+    bio:"19, Detailhandelsfachfrau im ersten Jahr. Wohnt bei den Eltern beim Bahnhof, sucht seit " +
+        "Monaten eine eigene Wohnung. Hat keinen Führerschein. Wählt zum ersten Mal.",
+    anliegen:[
+      "Eine Wohnung, die ich mit meinem Lohn zahlen kann",
+      "Höhere Löhne im Detailhandel",
+      "Abends von Tannmatt heimkommen, ohne Auto"],
+    tipp:"Drei der einundzwanzig Kandidierenden sind unter dreissig. Und: Kennt jemand auf den " +
+         "Listen die Arbeit im Verkauf oder in der Pflege aus eigener Erfahrung?" },
+
+  { name:"Werner Hofstetter",
+    bio:"61, Chef einer Schreinerei in Tannmatt mit zwölf Angestellten. Findet seit drei Jahren " +
+        "keine Lernenden mehr. Wartete letztes Jahr sieben Monate auf eine Baubewilligung.",
+    anliegen:[
+      "Weniger Papierkram bei Bewilligungen",
+      "Tiefere Abgaben für kleine Betriebe",
+      "Mehr Jugendliche in die Berufslehre"],
+    tipp:"Mehrere Kandidierende führen selber einen Betrieb. Schau nach, auf welchen Listen sie " +
+         "stehen und was diese Listen zu Vorschriften und Abgaben schreiben." },
+
+  { name:"Rosmarie Gerber",
+    bio:"73, Bäuerin im Hasental, hat den Hof an ihre Tochter übergeben. Der Bus ins Dorf fährt " +
+        "noch dreimal am Tag, die Poststelle ist seit zwei Jahren zu.",
+    anliegen:[
+      "Faire Preise für das, was der Hof produziert",
+      "Post und Bus im Dorf erhalten",
+      "Die AHV muss sicher bleiben"],
+    tipp:"Zwei Landwirte kandidieren – auf zwei verschiedenen Listen. Aus dem Hasental stammen " +
+         "überhaupt nur drei der einundzwanzig Personen." },
+
+  { name:"Ramesh Thangarajah",
+    bio:"39, Ingenieur bei der Papierfabrik in Riedern. Der Betrieb hat Kurzarbeit angemeldet. " +
+        "Zwei Kinder gehen hier zur Schule, die Prämienrechnung kam letzte Woche.",
+    anliegen:[
+      "Der Betrieb darf nicht schliessen, ich brauche die Stelle",
+      "Krippenplätze und Unterstützung für Familien",
+      "Die Krankenkassenprämien steigen jedes Jahr"],
+    tipp:"Eine kandidierende Person hat selber in der Papierfabrik gearbeitet. Und aus Riedern " +
+         "stammen fünf der einundzwanzig." },
+
+  { name:"Isabelle Renaud",
+    bio:"44, Winzerin am Tannsee bei Val-Riond. Der letzte Sommer war zu heiss und zu trocken, " +
+        "die Ernte fiel um ein Drittel kleiner aus. Verkauft die Hälfte direkt ab Hof.",
+    anliegen:[
+      "Die Sommer werden zu trocken – das ist mein Betrieb",
+      "Wasser für die Landwirtschaft, auch im August",
+      "Weniger Vorschriften beim Direktverkauf"],
+    tipp:"Deine Anliegen ziehen in zwei Richtungen: Klima und Betrieb stehen selten auf derselben " +
+         "Liste. Aus Val-Riond kandidiert übrigens genau eine Person pro Liste – fünf insgesamt." },
+
+  { name:"Nadia Ghebremariam",
+    bio:"24, Fachfrau Betreuung im Altersheim Tannmatt, Schichtdienst mit Wochenenden. Vor zwei " +
+        "Jahren eingebürgert und deshalb neu stimmberechtigt.",
+    anliegen:[
+      "Bessere Löhne und Dienstpläne in der Pflege",
+      "Genug Personal in den Altersheimen",
+      "In der Politik sollen auch Leute wie ich vorkommen"],
+    tipp:"Drei Kandidierende arbeiten im Gesundheits- oder Betreuungsbereich, verteilt auf zwei " +
+         "Listen. Schau auch auf Alter und Herkunft der Namen." }
 ];
 const ROUNDS = 3;
 const VOTERS = ROLES.length * ROUNDS;   // 18
@@ -427,13 +520,17 @@ function renderPosters(){
 
 function renderRoleGrid(){
   const box = $("#rolegrid"); box.innerHTML = "";
-  ROLES.forEach(([name,bio],i) => {
+  ROLES.forEach((r,i) => {
     const c = el("div","rolecard");
     const hd = el("div","hd");
-    const m = el("div","mono"); m.textContent = initials(name); hd.appendChild(m);
-    const nm = el("div","nm"); nm.textContent = name; hd.appendChild(nm);
+    const m = el("div","mono"); m.textContent = initials(r.name); hd.appendChild(m);
+    const nm = el("div","nm"); nm.textContent = r.name; hd.appendChild(nm);
     c.appendChild(hd);
-    const b = el("div","bio"); b.textContent = bio; c.appendChild(b);
+    const b = el("div","bio"); b.textContent = r.bio; c.appendChild(b);
+    const a = el("div","anliegen");
+    a.innerHTML = "<div class='ah'>Was mir wichtig ist</div><ul>" +
+      r.anliegen.map(x => "<li>" + x + "</li>").join("") + "</ul>";
+    c.appendChild(a);
     const x = el("div","x3"); x.textContent = "Rolle " + (i+1) + " — dreimal zu vergeben";
     c.appendChild(x); box.appendChild(c);
   });
@@ -464,21 +561,24 @@ function renderProgress(){
 }
 function renderRole(){
   const { role, nr, round } = roleAt(cur);
-  const [name, bio] = role;
   const r = $("#role"); r.innerHTML = "";
-  const m = el("div","mono"); m.textContent = initials(name); r.appendChild(m);
+  const m = el("div","mono"); m.textContent = initials(role.name); r.appendChild(m);
   const t = el("div");
   t.innerHTML = "<div class='muted small'>Rolle " + nr + " von " + ROLES.length + " &nbsp;·&nbsp; " +
     round + ". von " + ROUNDS + " Personen in dieser Lage &nbsp;·&nbsp; Stimmzettel " + (cur+1) +
-    " von " + VOTERS + "</div><div class='who'>" + name + "</div><div class='bio'>" + bio + "</div>";
+    " von " + VOTERS + "</div><div class='who'>" + role.name + "</div><div class='bio'>" + role.bio +
+    "</div><div class='anliegen'><div class='ah'>Was mir wichtig ist</div><ul>" +
+    role.anliegen.map(x => "<li>" + x + "</li>").join("") + "</ul></div>" +
+    "<div class='tipp'><b>Wonach du suchen kannst</b>" + role.tipp + "</div>";
   r.appendChild(t);
 }
 function renderChoose(){
   const box = $("#choose"); box.innerHTML = "";
   LISTS.forEach(l => {
     const b = el("button"); b.style.setProperty("--c", l.hex);
-    b.innerHTML = "<div class='cn'>" + l.name + "</div><div class='cs'>" + l.full +
-      "</div><div class='cc'>" + l.cands.length + " Kandidierende</div>";
+    b.innerHTML = "<div class='cn'>" + l.name + "</div><div class='cfull'>" + l.full +
+      "</div><div class='cs'>" + l.tag + "</div><div class='cc'>" + l.cands.length +
+      " Kandidierende</div>";
     b.onclick = () => pickList(l.id);
     box.appendChild(b);
   });
@@ -568,6 +668,21 @@ function renderBallot(){
   const skip = el("button","btn-ghost"); skip.textContent = "Restliche zufällig abstimmen lassen";
   skip.onclick = () => { castBallot(); fillRest(); }; row.appendChild(skip);
   foot.appendChild(row); b.appendChild(foot); box.appendChild(b);
+
+  /* Nachschlagen beim Panaschieren */
+  const det = document.createElement("details");
+  det.className = "ref";
+  let inner = "<summary>Alle einundzwanzig Kandidierenden nachschlagen</summary><div class='refgrid'>";
+  LISTS.forEach(l => {
+    inner += "<div class='refcol' style='--c:" + l.hex + "'><h4>" + l.name + "</h4><ul>";
+    l.cands.forEach((c,i) => {
+      inner += "<li><b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + jobOf(c) + "</i></li>";
+    });
+    inner += "</ul></div>";
+  });
+  inner += "</div>";
+  det.innerHTML = inner;
+  box.appendChild(det);
 }
 function castBallot(){ ballots.push({list:curList, slots:curSlots.slice()}); cur++; nextVoter(); }
 
