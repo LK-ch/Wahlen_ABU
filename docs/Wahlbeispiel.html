@@ -1,1 +1,956 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anna wählt – Proporzwahl im Kanton Tannmatt</title>
+<style>
+:root{
+  --paper:#E6E9E4;
+  --sheet:#FFFFFF;
+  --ink:#1F2B33;
+  --muted:#68767E;
+  --rule:#CBCFC6;
+  --rule-strong:#8F9891;
+  --rot:#C1121F;
+  --blau:#0353A4;
+  --gruen:#2D6A4F;
+  --gelb:#A97400;
+  --water:#9FBFCB;
+  --land:#DCE0D6;
+  --focus:#0353A4;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 100px}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-0.025em}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:.96;letter-spacing:-0.045em}
+h2{font-size:clamp(22px,3.2vw,30px);line-height:1.12;margin-bottom:8px}
+h3{font-size:17px;letter-spacing:-0.015em}
+p{margin:0 0 12px}
+.lede{font-size:clamp(17px,2.3vw,21px);line-height:1.45;max-width:46ch}
+.muted{color:var(--muted)}
+.small{font-size:13.5px;line-height:1.5}
+.max70{max-width:68ch}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
+.btn{background:var(--ink);color:#fff;border:1.5px solid var(--ink);padding:12px 22px;
+  font-weight:700;letter-spacing:-0.012em;font-size:16.5px}
+.btn:hover{background:#0d161b;border-color:#0d161b}
+.btn[disabled]{background:var(--rule);border-color:var(--rule);color:#8b918a;cursor:not-allowed}
+.btn-ghost{background:transparent;border:1.5px solid var(--rule-strong);padding:10px 17px;
+  font-weight:600;font-size:14.5px}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(31,43,51,.06)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:20px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:14px 0 12px;border-bottom:1px solid var(--rule);margin-bottom:26px;flex-wrap:wrap}
+.crest{display:flex;align-items:center;gap:11px;font-weight:700;font-size:14.5px;letter-spacing:-0.01em}
+.crest svg{display:block}
+.stamp{border:1.5px solid var(--rule-strong);color:var(--muted);padding:5px 11px;
+  font-size:12px;border-radius:2px;white-space:nowrap}
+
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;margin-bottom:8px}
+.map{width:100%;height:auto;display:block}
+.map .lbl{font-size:11px;font-weight:700;fill:var(--ink);letter-spacing:.09em}
+.map .lbl-s{font-size:9.5px;font-weight:600;fill:var(--muted);letter-spacing:.07em}
+.map .wlbl{font-size:10px;font-style:italic;fill:#5b7a86;letter-spacing:.05em}
+
+.facts{border-top:2px solid var(--ink);margin-top:22px}
+.facts div{display:flex;justify-content:space-between;gap:14px;padding:8px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px}
+.facts b{font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+
+.anna{background:var(--sheet);border:1px solid var(--rule);border-left:6px solid var(--ink);
+  padding:20px 24px;margin:34px 0 8px;border-radius:2px;max-width:74ch}
+.anna h3{margin-bottom:6px}
+
+.posters{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:22px}
+.poster{border-radius:2px;overflow:hidden;border:1px solid var(--rule);background:var(--sheet);
+  display:flex;flex-direction:column}
+.poster .top{background:var(--c);color:#fff;padding:16px 16px 18px;min-height:132px;
+  display:flex;flex-direction:column;justify-content:space-between}
+.poster .nm{font-size:13px;font-weight:700;letter-spacing:.12em;opacity:.88}
+.poster .slogan{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.08;
+  letter-spacing:-0.03em;margin-top:8px}
+.poster .body{padding:12px 15px 15px}
+.poster .tag{font-size:12.5px;color:var(--muted);line-height:1.4;margin-bottom:10px}
+.poster ul{margin:0;padding:0;list-style:none;font-size:13.5px}
+.poster li{padding:5px 0;border-top:1px solid var(--rule);line-height:1.3}
+.poster li b{color:var(--c);font-variant-numeric:tabular-nums;margin-right:6px}
+.poster li i{display:block;font-style:normal;font-size:11.5px;color:var(--muted)}
+
+/* Rollenkarten auf der Startseite */
+.rolegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.rolecard{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
+  padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px}
+.rolecard .hd{display:flex;align-items:center;gap:11px}
+.rolecard .mono{width:40px;height:40px;flex:0 0 40px;font-size:15px}
+.rolecard .nm{font-weight:700;font-size:15.5px;letter-spacing:-0.015em;line-height:1.2}
+.rolecard .bio{font-size:13px;color:var(--muted);line-height:1.45}
+.rolecard .x3{font-size:11.5px;font-weight:700;color:var(--ink);border-top:1px solid var(--rule);
+  padding-top:8px;margin-top:auto;letter-spacing:.02em}
+
+.mono{width:62px;height:62px;flex:0 0 62px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;
+  letter-spacing:-0.03em}
+
+/* Wahlgang */
+.progress{display:flex;gap:3px;margin:10px 0 24px;align-items:center}
+.pip{height:10px;background:var(--rule);border-radius:1px;flex:1;min-width:7px}
+.pip[data-done="1"]{background:var(--ink)}
+.pip[data-now="1"]{background:var(--sheet);box-shadow:inset 0 0 0 2px var(--ink)}
+.pip.gap{margin-left:16px}
+
+.role{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
+  display:flex;gap:18px;align-items:center;padding:18px 22px;margin-bottom:22px}
+.role .who{font-size:20px;font-weight:700;letter-spacing:-0.02em}
+.role .bio{font-size:14.5px;color:var(--muted);line-height:1.4;max-width:62ch}
+
+.choose{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 6px}
+.choose button{background:var(--sheet);border:1.5px solid var(--rule);border-top:7px solid var(--c);
+  padding:15px 15px 16px;text-align:left}
+.choose button:hover{border-color:var(--c)}
+.choose .cn{font-weight:700;font-size:18px;color:var(--c);letter-spacing:-0.02em}
+.choose .cs{font-size:13px;color:var(--ink);margin-top:3px;line-height:1.3}
+.choose .cc{font-size:12px;color:var(--muted);margin-top:6px}
+
+.ballot{background:var(--sheet);border:1px solid var(--rule);border-top:9px solid var(--c);
+  border-radius:2px;margin-top:18px}
+.ballot-head{padding:15px 19px 13px;border-bottom:1.5px solid var(--ink);display:flex;
+  justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ballot-head h2{color:var(--c);margin:0}
+.line{display:flex;align-items:center;gap:12px;padding:9px 19px;border-bottom:1px solid var(--rule)}
+.line .n{font-weight:700;font-variant-numeric:tabular-nums;min-width:1.3em;color:var(--muted)}
+select{font:inherit;font-size:15px;padding:8px 9px;border:1px solid var(--rule-strong);
+  border-radius:2px;background:#fff;color:var(--ink);width:100%;max-width:470px}
+select.foreign{border-color:var(--fc);color:var(--fc);font-weight:600}
+select.blank{color:var(--muted);font-style:italic}
+.badge{font-size:11.5px;font-weight:700;color:var(--fc);border:1.5px solid var(--fc);
+  padding:2px 7px;border-radius:2px;white-space:nowrap}
+.ballot-foot{padding:15px 19px 19px;background:#FBFBF8}
+.warn{background:#FFF2F2;border:1.5px solid var(--rot);color:var(--rot);padding:10px 13px;
+  font-size:14px;font-weight:600;border-radius:2px;margin-bottom:12px}
+.hint{font-size:13.5px;color:var(--muted);line-height:1.5;max-width:72ch}
+
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--sheet);margin:10px 0 4px}
+caption{text-align:left;font-weight:700;padding:0 0 6px;font-size:15px}
+th,td{border:1px solid var(--rule);padding:7px 10px;text-align:left}
+th{background:#DFE3DB;font-weight:700}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{background:#DFE3DB;font-weight:700}
+.swatch{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;background:var(--c)}
+
+.step{border-top:2px solid var(--ink);padding-top:17px;margin-top:34px}
+.step .no{font-weight:700;font-size:12.5px;color:var(--muted);letter-spacing:.03em}
+.formula{background:var(--sheet);border:1px solid var(--rule);border-left:5px solid var(--ink);
+  padding:14px 17px;font-variant-numeric:tabular-nums;font-size:16px;border-radius:2px;margin:11px 0}
+.formula b{font-size:20px}
+
+.hemi{width:100%;max-width:560px;height:auto;display:block;margin:6px 0 4px}
+@media (prefers-reduced-motion:no-preference){
+  .hemi circle.s{animation:pop .4s cubic-bezier(.34,1.42,.5,1) both}
+}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+.barrow{display:grid;grid-template-columns:76px 1fr;gap:13px;align-items:center;margin-bottom:15px}
+.barlab{font-weight:700;color:var(--c);font-size:15px}
+.bar{height:20px;background:var(--c);border-radius:1px;min-width:3px;display:flex;
+  align-items:center;padding-left:8px;color:#fff;font-size:12px;font-weight:700;white-space:nowrap}
+.bar.hollow{background:transparent;border:2px solid var(--c);color:var(--c);padding-left:6px}
+.barpair{display:flex;flex-direction:column;gap:4px}
+.legend{display:flex;gap:20px;font-size:13px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
+.legend i{display:inline-block;width:15px;height:11px;background:var(--muted);margin-right:6px}
+.legend i.h{background:transparent;border:2px solid var(--muted)}
+
+.elected{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;margin:12px 0}
+.elected div{padding:11px 17px;border-bottom:1px solid var(--rule);display:flex;
+  justify-content:space-between;gap:14px;align-items:baseline}
+.elected div:last-child{border-bottom:0}
+.elected .nm{font-weight:700}
+.elected .li{color:var(--c);font-weight:700;margin-right:9px}
+.elected .job{color:var(--muted);font-size:13.5px}
+.elected .votes{color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.qlist{counter-reset:q;padding:0;margin:12px 0 0;list-style:none}
+.qlist li{counter-increment:q;padding:12px 0 12px 40px;border-top:1px solid var(--rule);
+  position:relative;max-width:76ch}
+.qlist li::before{content:counter(q);position:absolute;left:0;top:12px;font-weight:700;
+  color:var(--muted);font-variant-numeric:tabular-nums}
+
+.notice{border:1.5px solid var(--rule-strong);background:var(--sheet);padding:14px 17px;
+  border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0;max-width:76ch}
+.hidden{display:none}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:22px}
+  .posters{grid-template-columns:repeat(2,1fr)}
+  .choose{grid-template-columns:repeat(2,1fr)}
+  .rolegrid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:540px){
+  .posters{grid-template-columns:1fr}
+  .choose{grid-template-columns:1fr}
+  .rolegrid{grid-template-columns:1fr}
+  .role{flex-direction:column;align-items:flex-start;gap:12px}
+  .line{flex-wrap:wrap}
+}
+@media print{
+  body{background:#fff}.noprint{display:none!important}.wrap{max-width:100%;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <div class="crest">
+    <svg width="24" height="28" viewBox="0 0 24 28" aria-hidden="true">
+      <path d="M2 2 h20 v16 c0 5 -7 8 -10 10 C9 26 2 23 2 18 Z" fill="#1F2B33"/>
+      <path d="M12 7 l3.4 6.6 h-6.8 Z M12 12 l4.6 8.4 h-9.2 Z" fill="#E6E9E4"/>
+    </svg>
+    <span>Kanton Tannmatt</span>
+  </div>
+  <div class="stamp" id="stamp">Wahlbüro geschlossen</div>
+</div>
+
+<!-- ================= START ================= -->
+<section id="screen-start">
+
+  <div class="hero">
+    <div>
+      <h1>Anna<br>wählt</h1>
+      <p class="lede" style="margin-top:18px">Am 19. Oktober wählt der Kanton Tannmatt seine sieben
+      Vertreterinnen und Vertreter in den Nationalrat. Anna Vieira ist neunzehn und zum ersten Mal dabei.</p>
+      <div class="facts">
+        <div><span>Einwohnende</span><b>341 800</b></div>
+        <div><span>Davon stimmberechtigt</span><b>236 400</b></div>
+        <div><span>Hauptort</span><b>Tannmatt</b></div>
+        <div><span>Sitze im Nationalrat</span><b>7</b></div>
+      </div>
+    </div>
+
+    <svg class="map" viewBox="0 0 400 310" role="img" aria-label="Karte des fiktiven Kantons Tannmatt mit Hauptort, drei Bezirken und dem Tannsee">
+      <path d="M62 44 L132 24 L201 38 L258 22 L322 58 L356 112 L341 178 L361 233 L299 278 L224 264 L159 283 L96 252 L71 192 L41 142 Z"
+            fill="var(--land)" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M201 38 C 196 110 188 170 176 262" fill="none" stroke="var(--rule-strong)"
+            stroke-width="1.3" stroke-dasharray="6 5"/>
+      <path d="M196 118 C 250 128 300 132 349 130" fill="none" stroke="var(--rule-strong)"
+            stroke-width="1.3" stroke-dasharray="6 5"/>
+      <path d="M186 196 C 214 182 254 188 266 210 C 275 231 246 249 214 243 C 188 238 172 214 186 196 Z"
+            fill="var(--water)" stroke="#7CA0AE" stroke-width="1.4"/>
+      <path d="M133 27 C 148 78 158 132 186 197" fill="none" stroke="var(--water)" stroke-width="3.4"
+            stroke-linecap="round"/>
+      <path d="M258 236 C 276 254 292 266 300 277" fill="none" stroke="var(--water)" stroke-width="3.4"
+            stroke-linecap="round"/>
+      <circle cx="150" cy="150" r="7" fill="var(--ink)"/>
+      <circle cx="150" cy="150" r="12.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+      <text class="lbl" x="169" y="147">TANNMATT</text>
+      <text class="lbl-s" x="169" y="161">Hauptort</text>
+      <circle cx="272" cy="72" r="4" fill="var(--ink)"/>
+      <text class="lbl-s" x="282" y="76">RIEDERN</text>
+      <circle cx="303" cy="163" r="4" fill="var(--ink)"/>
+      <text class="lbl-s" x="242" y="167">VAL-RIOND</text>
+      <circle cx="112" cy="238" r="4" fill="var(--ink)"/>
+      <text class="lbl-s" x="122" y="242">HASENTAL</text>
+      <text class="wlbl" x="203" y="220">Tannsee</text>
+      <text class="lbl-s" x="41" y="298" fill="var(--muted)">20 km</text>
+      <path d="M41 289 h56" stroke="var(--muted)" stroke-width="1.6"/>
+      <path d="M41 285 v8 M97 285 v8" stroke="var(--muted)" stroke-width="1.6"/>
+    </svg>
+  </div>
+
+  <div class="anna">
+    <h3>Wer ist Anna?</h3>
+    <p style="margin:0">Anna Vieira ist in Tannmatt aufgewachsen, hat letzten Sommer die Lehre im
+    Detailhandel abgeschlossen und wohnt noch bei ihren Eltern in einem Block beim Bahnhof. Ihre Miete
+    wäre bezahlbar, wenn sie eine Wohnung fände. Vor zwei Wochen lag das Wahlmaterial im Briefkasten:
+    vier Listen, achtzehn Namen, sieben Sitze. Anna weiss nicht, wo sie anfangen soll.</p>
+    <p class="small muted" style="margin:10px 0 0">Der Kanton Tannmatt, seine Bezirke und alle
+    Personen in dieser Simulation sind erfunden. Das Wahlverfahren ist echt.</p>
+  </div>
+
+  <div class="step">
+    <div class="no">Der Wahlkreis</div>
+    <h2>Sieben Sitze</h2>
+    <p class="max70">Tannmatt hat 341 800 Einwohnende und damit sieben der 200 Nationalratssitze.
+    Sieben Sitze heissen: Eine Liste braucht rund einen Achtel aller Stimmen, also etwa 12,5 Prozent,
+    um einen Sitz zu holen. Diese Hürde steht in keinem Gesetz. Sie ergibt sich allein aus der
+    Rechnung.</p>
+    <p class="small muted max70">Jede stimmberechtigte Person hat sieben Stimmen. Im Spiel sind das
+    18 × 7 = 126 Parteistimmen.</p>
+  </div>
+
+  <div class="step">
+    <div class="no">Auf dem Stimmzettel</div>
+    <h2>Vier Listen, achtzehn Namen</h2>
+    <div class="posters" id="posters"></div>
+  </div>
+
+  <div class="step">
+    <div class="no">An der Urne</div>
+    <h2>Sechs Rollen, achtzehn Stimmzettel</h2>
+    <p class="max70">Achtzehn Personen stimmen ab, aber es gibt nur sechs Rollen. Jede Rolle wird
+    dreimal gespielt – von drei verschiedenen Menschen in derselben Lage. Ob die drei gleich wählen,
+    ist die eigentliche Frage.</p>
+    <p class="small muted max70">In einer Klasse von 18: jede Rollenkarte dreimal ausdrucken oder
+    dreimal vergeben. Nach der Wahl vergleichen, was die drei Anna-Spielenden angekreuzt haben.</p>
+    <div class="rolegrid" id="rolegrid"></div>
+    <div class="btn-row">
+      <button class="btn" id="go-vote">Wahllokal öffnen</button>
+      <button class="btn-ghost" id="go-demo">Alle 18 zufällig wählen lassen</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WAHL ================= -->
+<section id="screen-vote" class="hidden">
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="role" id="role"></div>
+  <div id="step-list">
+    <h2>Welchen Stimmzettel nimmst du?</h2>
+    <p class="muted small max70">Du kannst ihn danach frei verändern – streichen, Namen doppelt
+    eintragen oder Leute von anderen Listen holen.</p>
+    <div class="choose" id="choose"></div>
+  </div>
+  <div id="step-fill" class="hidden"></div>
+</section>
+
+<!-- ================= AUSZÄHLUNG ================= -->
+<section id="screen-count" class="hidden"></section>
+
+<!-- ================= AUSWERTUNG ================= -->
+<section id="screen-result" class="hidden"></section>
+
+</div>
+
+<script>
+"use strict";
+
+/* ==========================================================
+   KANTON TANNMATT – alle Personen und Orte sind erfunden
+   ========================================================== */
+const LISTS = [
+  { id:"R", name:"ROT", hex:"#C1121F", slogan:"Eine Wohnung, die man zahlen kann.",
+    tag:"Bezahlbarer Wohnraum, mehr Lehrstellen, besserer Schutz bei Krankheit.",
+    cands:[
+      ["Amina Tesfay","34, Primarlehrerin, Tannmatt"],
+      ["Reto Zurbriggen","51, Maurer und Gewerkschafter, Hasental"],
+      ["Luana Fernandes","28, Pflegefachfrau, Tannmatt"],
+      ["Kemal Yilmaz","45, Chemielaborant, Riedern"],
+      ["Céline Jaquier","39, Sozialarbeiterin, Val-Riond"],
+      ["Marco De Luca","62, Rentner, früher Papierfabrik"]
+    ]},
+  { id:"B", name:"BLAU", hex:"#0353A4", slogan:"Weniger Vorschriften. Mehr Betriebe.",
+    tag:"Tiefere Steuern, schlankere Verwaltung, starkes Gewerbe in den Tälern.",
+    cands:[
+      ["Beatrice von Gunten","57, Treuhänderin, Tannmatt"],
+      ["Driton Krasniqi","41, Bauunternehmer, Riedern"],
+      ["Andreas Hodel","49, Landwirt, Hasental"],
+      ["Priya Rajeswaran","36, Zahnärztin, Tannmatt"],
+      ["Jean-Marc Nicolet","63, Hotelier, Val-Riond"],
+      ["Sandra Bernasconi","30, Software-Unternehmerin, Tannmatt"]
+    ]},
+  { id:"G", name:"GRÜN", hex:"#2D6A4F", slogan:"Der letzte Bus fährt um Mitternacht.",
+    tag:"Nachtbus in alle Täler, Solardächer auf Schulhäusern, kein Bauland mehr am Tannsee.",
+    cands:[
+      ["Nuray Öztürk","33, Biologin, Val-Riond"],
+      ["Noah Aebischer","24, Student der Umweltwissenschaften"],
+      ["Lukas Wang","47, Architekt, Tannmatt"],
+      ["Fatima Ahmadi","29, Velomechanikerin, Riedern"]
+    ]},
+  { id:"Y", name:"GELB", hex:"#A97400", slogan:"Stimmrecht ab sechzehn.",
+    tag:"Politik ohne Papierkram, digitale Verwaltung, Stimmrechtsalter 16.",
+    cands:[
+      ["Vincent Perrin","22, Mediamatiker, Val-Riond"],
+      ["Sanja Jovanović","26, Datenanalystin, Tannmatt"]
+    ]}
+];
+
+/* Sechs Rollen – jede wird dreimal gespielt */
+const ROLES = [
+  ["Anna Vieira","19, Detailhandelsfachfrau im ersten Jahr. Wohnt bei den Eltern beim Bahnhof, sucht seit Monaten eine eigene Wohnung. Wählt zum ersten Mal."],
+  ["Werner Hofstetter","61, Chef einer Schreinerei in Tannmatt mit zwölf Angestellten. Findet seit drei Jahren keine Lernenden mehr und ärgert sich über die Bauvorschriften."],
+  ["Rosmarie Gerber","73, Bäuerin im Hasental, hat den Hof an ihre Tochter übergeben. Der Bus ins Dorf fährt noch dreimal am Tag, die Poststelle ist zu."],
+  ["Ramesh Thangarajah","39, Ingenieur bei der Papierfabrik in Riedern. Der Betrieb hat Kurzarbeit angemeldet, zwei Kinder gehen hier zur Schule."],
+  ["Isabelle Renaud","44, Winzerin am Tannsee bei Val-Riond. Der letzte Sommer war zu heiss und zu trocken, die Ernte fiel um ein Drittel kleiner aus."],
+  ["Nadia Ghebremariam","24, Fachfrau Betreuung im Altersheim Tannmatt, Schichtdienst. Vor zwei Jahren eingebürgert und deshalb neu stimmberechtigt."]
+];
+const ROUNDS = 3;
+const VOTERS = ROLES.length * ROUNDS;   // 18
+const SEATS = 7;                        // Tannmatt hat sieben Sitze
+
+const CANDS = [];
+LISTS.forEach(l => l.cands.forEach((c,i) => CANDS.push({
+  code:l.id+(i+1), name:c[0], job:c[1], list:l.id })));
+const candBy = c => CANDS.find(x => x.code === c);
+const listBy = id => LISTS.find(l => l.id === id);
+const roleAt = i => ({ role: ROLES[i % ROLES.length], nr: (i % ROLES.length)+1,
+                       round: Math.floor(i / ROLES.length)+1 });
+
+/* ==========================================================
+   ZUSTAND
+   ========================================================== */
+let ballots = [], cur = 0, curList = null, curSlots = [], lotUsed = false;
+
+const $ = s => document.querySelector(s);
+const el = (t,c) => { const e = document.createElement(t); if(c) e.className = c; return e; };
+function show(id){
+  ["start","vote","count","result"].forEach(s =>
+    $("#screen-"+s).classList.toggle("hidden", s !== id));
+  window.scrollTo({top:0, behavior:"instant"});
+}
+const initials = n => n.split(" ").map(w => w[0]).join("").slice(0,2);
+
+/* ==========================================================
+   START
+   ========================================================== */
+function renderPosters(){
+  const box = $("#posters"); box.innerHTML = "";
+  LISTS.forEach(l => {
+    const p = el("div","poster"); p.style.setProperty("--c", l.hex);
+    const top = el("div","top");
+    top.innerHTML = "<div class='nm'>LISTE " + l.name + "</div><div class='slogan'>" + l.slogan + "</div>";
+    p.appendChild(top);
+    const body = el("div","body");
+    const tg = el("div","tag"); tg.textContent = l.tag; body.appendChild(tg);
+    const ul = el("ul");
+    l.cands.forEach((c,i) => {
+      const li = el("li");
+      li.innerHTML = "<b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + c[1] + "</i>";
+      ul.appendChild(li);
+    });
+    body.appendChild(ul); p.appendChild(body); box.appendChild(p);
+  });
+}
+
+function renderRoleGrid(){
+  const box = $("#rolegrid"); box.innerHTML = "";
+  ROLES.forEach(([name,bio],i) => {
+    const c = el("div","rolecard");
+    const hd = el("div","hd");
+    const m = el("div","mono"); m.textContent = initials(name); hd.appendChild(m);
+    const nm = el("div","nm"); nm.textContent = name; hd.appendChild(nm);
+    c.appendChild(hd);
+    const b = el("div","bio"); b.textContent = bio; c.appendChild(b);
+    const x = el("div","x3"); x.textContent = "Rolle " + (i+1) + " — dreimal zu vergeben";
+    c.appendChild(x);
+    box.appendChild(c);
+  });
+}
+
+/* ==========================================================
+   WAHLGANG
+   ========================================================== */
+function startVoting(){
+  ballots = []; cur = 0; lotUsed = false;
+  $("#stamp").textContent = "Wahllokal offen";
+  show("vote"); nextVoter();
+}
+
+function nextVoter(){
+  if (cur >= VOTERS){ $("#stamp").textContent = "Auszählung"; runCount(); return; }
+  curList = null; curSlots = [];
+  $("#step-fill").classList.add("hidden");
+  $("#step-list").classList.remove("hidden");
+  renderProgress(); renderRole(); renderChoose();
+}
+
+function renderProgress(){
+  const p = $("#progress"); p.innerHTML = "";
+  for (let i=0;i<VOTERS;i++){
+    const d = el("div","pip");
+    if (i % ROLES.length === 0 && i > 0) d.classList.add("gap");
+    if (i < cur) d.dataset.done = "1";
+    if (i === cur) d.dataset.now = "1";
+    p.appendChild(d);
+  }
+}
+
+function renderRole(){
+  const { role, nr, round } = roleAt(cur);
+  const [name, bio] = role;
+  const r = $("#role"); r.innerHTML = "";
+  const m = el("div","mono"); m.textContent = initials(name); r.appendChild(m);
+  const t = el("div");
+  t.innerHTML = "<div class='muted small'>Rolle " + nr + " von " + ROLES.length +
+    " &nbsp;·&nbsp; " + round + ". von " + ROUNDS + " Personen in dieser Lage" +
+    " &nbsp;·&nbsp; Stimmzettel " + (cur+1) + " von " + VOTERS +
+    "</div><div class='who'>" + name + "</div><div class='bio'>" + bio + "</div>";
+  r.appendChild(t);
+}
+
+function renderChoose(){
+  const box = $("#choose"); box.innerHTML = "";
+  LISTS.forEach(l => {
+    const b = el("button"); b.style.setProperty("--c", l.hex);
+    b.innerHTML = "<div class='cn'>Liste " + l.name + "</div><div class='cs'>" + l.slogan +
+      "</div><div class='cc'>" + l.cands.length + " Kandidierende</div>";
+    b.onclick = () => pickList(l.id);
+    box.appendChild(b);
+  });
+}
+
+function pickList(id){
+  curList = id;
+  const l = listBy(id);
+  curSlots = [];
+  for (let i=0;i<SEATS;i++) curSlots.push(i < l.cands.length ? l.id+(i+1) : null);
+  $("#step-list").classList.add("hidden");
+  $("#step-fill").classList.remove("hidden");
+  renderBallot();
+}
+
+function renderBallot(){
+  const l = listBy(curList);
+  const box = $("#step-fill"); box.innerHTML = "";
+  const b = el("div","ballot"); b.style.setProperty("--c", l.hex);
+
+  const head = el("div","ballot-head");
+  head.innerHTML = "<h2>Stimmzettel Liste " + l.name + "</h2><div class='muted small'>Kanton Tannmatt &nbsp;|&nbsp; " +
+    SEATS + " Stimmen</div>";
+  b.appendChild(head);
+
+  curSlots.forEach((code,i) => {
+    const row = el("div","line");
+    const n = el("div","n"); n.textContent = (i+1); row.appendChild(n);
+
+    const sel = el("select");
+    sel.setAttribute("aria-label","Zeile " + (i+1));
+    const blank = el("option");
+    blank.value = ""; blank.textContent = "leer lassen — Zusatzstimme für " + l.name;
+    sel.appendChild(blank);
+    LISTS.forEach(ll => {
+      const og = document.createElement("optgroup");
+      og.label = "Liste " + ll.name + (ll.id === curList ? " (eigene Liste)" : "");
+      ll.cands.forEach((c,k) => {
+        const o = el("option");
+        o.value = ll.id+(k+1);
+        o.textContent = c[0] + "  (" + ll.id+(k+1) + ")";
+        og.appendChild(o);
+      });
+      sel.appendChild(og);
+    });
+    sel.value = code || "";
+    sel.onchange = () => { curSlots[i] = sel.value || null; renderBallot(); };
+    if (!code) sel.className = "blank";
+    else if (candBy(code).list !== curList){
+      sel.className = "foreign";
+      sel.style.setProperty("--fc", listBy(candBy(code).list).hex);
+    }
+    row.appendChild(sel);
+
+    if (code && candBy(code).list !== curList){
+      const bd = el("div","badge");
+      bd.style.setProperty("--fc", listBy(candBy(code).list).hex);
+      bd.textContent = "panaschiert von " + listBy(candBy(code).list).name;
+      row.appendChild(bd);
+    }
+    b.appendChild(row);
+  });
+
+  const foot = el("div","ballot-foot");
+  const counts = {};
+  curSlots.forEach(c => { if(c) counts[c] = (counts[c]||0)+1; });
+  const tooMany = Object.keys(counts).filter(c => counts[c] > 2);
+  if (tooMany.length){
+    const w = el("div","warn");
+    w.textContent = tooMany.map(c => candBy(c).name).join(", ") +
+      (tooMany.length===1 ? " steht " : " stehen ") +
+      "mehr als zweimal auf dem Zettel. Erlaubt sind höchstens zwei Stimmen pro Person.";
+    foot.appendChild(w);
+  }
+  const blanks = curSlots.filter(c => !c).length;
+  const foreign = curSlots.filter(c => c && candBy(c).list !== curList).length;
+  const cum = Object.keys(counts).filter(c => counts[c] === 2).length;
+  const hint = el("div","hint");
+  hint.innerHTML = "Auf diesem Zettel: <b>" + blanks + "</b> leere Zeilen (Zusatzstimmen für " + l.name +
+    "), <b>" + foreign + "</b> panaschierte Stimmen, <b>" + cum + "</b> kumulierte Personen. " +
+    l.name + " erhält dadurch <b>" + (SEATS-foreign) + "</b> von " + SEATS + " Parteistimmen dieses Zettels.";
+  foot.appendChild(hint);
+
+  const row = el("div","btn-row");
+  const submit = el("button","btn");
+  submit.textContent = "Zettel einwerfen";
+  submit.disabled = tooMany.length > 0;
+  submit.onclick = castBallot; row.appendChild(submit);
+
+  const back = el("button","btn-ghost"); back.textContent = "Andere Liste nehmen";
+  back.onclick = () => { $("#step-fill").classList.add("hidden"); $("#step-list").classList.remove("hidden"); };
+  row.appendChild(back);
+
+  const rnd = el("button","btn-ghost"); rnd.textContent = "Zufällig ausfüllen";
+  rnd.onclick = () => { curSlots = randomSlots(curList); renderBallot(); };
+  row.appendChild(rnd);
+
+  const skip = el("button","btn-ghost"); skip.textContent = "Restliche zufällig abstimmen lassen";
+  skip.onclick = () => { castBallot(); fillRest(); };
+  row.appendChild(skip);
+
+  foot.appendChild(row); b.appendChild(foot); box.appendChild(b);
+}
+
+function castBallot(){ ballots.push({list:curList, slots:curSlots.slice()}); cur++; nextVoter(); }
+
+function weightedList(){
+  const r = Math.random();
+  if (r < 0.33) return "R";
+  if (r < 0.63) return "B";
+  if (r < 0.85) return "G";
+  return "Y";
+}
+function randomSlots(listId){
+  const slots = [], used = {};
+  for (let i=0;i<SEATS;i++){
+    const r = Math.random();
+    if (r < 0.13){ slots.push(null); continue; }
+    let pool = (r < 0.29) ? CANDS.filter(c => c.list !== listId) : CANDS.filter(c => c.list === listId);
+    pool = pool.filter(c => (used[c.code]||0) < 2);
+    if (!pool.length){ slots.push(null); continue; }
+    const pick = pool[Math.floor(Math.random()*pool.length)];
+    used[pick.code] = (used[pick.code]||0)+1;
+    slots.push(pick.code);
+  }
+  return slots;
+}
+function fillRest(){
+  while (cur < VOTERS){
+    const li = weightedList();
+    ballots.push({list:li, slots:randomSlots(li)});
+    cur++;
+  }
+  nextVoter();
+}
+function demoAll(){
+  ballots = []; cur = 0; lotUsed = false;
+  $("#stamp").textContent = "Auszählung";
+  fillRest();
+}
+
+/* ==========================================================
+   AUSZÄHLUNG
+   ========================================================== */
+function tally(){
+  const candVotes = {}; CANDS.forEach(c => candVotes[c.code] = 0);
+  const zusatz = {}; LISTS.forEach(l => zusatz[l.id] = 0);
+  let panasch = 0;
+  ballots.forEach(bl => bl.slots.forEach(code => {
+    if (code){ candVotes[code]++; if (candBy(code).list !== bl.list) panasch++; }
+    else zusatz[bl.list]++;
+  }));
+  const party = {};
+  LISTS.forEach(l => {
+    party[l.id] = l.cands.reduce((s,_,i) => s + candVotes[l.id+(i+1)], 0) + zusatz[l.id];
+  });
+  const total = Object.values(party).reduce((a,b)=>a+b,0);
+  return { candVotes, zusatz, party, total, panasch };
+}
+
+function allocate(party, seats){
+  const log = [];
+  const vz = Math.floor(Object.values(party).reduce((a,b)=>a+b,0) / (seats+1)) + 1;
+  const got = {}, capacity = {};
+  LISTS.forEach(l => capacity[l.id] = l.cands.length);
+  LISTS.forEach(l => got[l.id] = Math.min(Math.floor(party[l.id]/vz), capacity[l.id]));
+  let assigned = Object.values(got).reduce((a,b)=>a+b,0), guard = 0;
+  while (assigned < seats && guard++ < 60){
+    let best = -1, winners = [];
+    LISTS.forEach(l => {
+      if (got[l.id] >= capacity[l.id]) return;
+      const q = party[l.id] / (got[l.id]+1);
+      if (q > best + 1e-9){ best = q; winners = [l.id]; }
+      else if (Math.abs(q-best) < 1e-9) winners.push(l.id);
+    });
+    if (!winners.length) break;
+    const lot = winners.length > 1;
+    if (lot) lotUsed = true;
+    const w = winners[Math.floor(Math.random()*winners.length)];
+    log.push({ round: log.length+1, quot: best, winner: w, lot, snapshot: Object.assign({}, got) });
+    got[w]++; assigned++;
+  }
+  return { vz, got, log, capped: LISTS.filter(l => got[l.id] >= capacity[l.id]).map(l=>l.id) };
+}
+
+function electedOf(listId, n, candVotes){
+  const l = listBy(listId);
+  const arr = l.cands.map((c,i) => ({ code:l.id+(i+1), name:c[0], job:c[1], v:candVotes[l.id+(i+1)] }));
+  for (let i = arr.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  arr.sort((a,b) => b.v - a.v);
+  if (n > 0 && n < arr.length && arr[n-1].v === arr[n].v) lotUsed = true;
+  return { chosen: arr.slice(0,n), all: arr };
+}
+
+let RESULT = null;
+function runCount(){
+  const t = tally();
+  const a = allocate(t.party, SEATS);
+  RESULT = { t, a };
+  renderCount(); show("count");
+}
+
+const pct = (x,of) => (of ? (x/of*100) : 0).toFixed(1).replace(".",",") + " %";
+const sw = hex => '<span class="swatch" style="--c:'+hex+'"></span>';
+
+function hemicycle(got){
+  const seats = [];
+  LISTS.forEach(l => { for (let i=0;i<got[l.id];i++) seats.push(l); });
+  const n = seats.length || 1;
+  const cx = 200, cy = 158, R = 118, rad = Math.min(15, (Math.PI*R)/(n*2.35));
+  let s = '<svg class="hemi" viewBox="0 0 400 178" role="img" aria-label="Sitzverteilung als Halbkreis">';
+  s += '<path d="M '+(cx-R-rad-6)+' '+cy+' A '+(R+rad+6)+' '+(R+rad+6)+' 0 0 1 '+(cx+R+rad+6)+' '+cy+
+       '" fill="none" stroke="#CBCFC6" stroke-width="1.2"/>';
+  seats.forEach((l,i) => {
+    const th = Math.PI - (i + 0.5) * (Math.PI / n);
+    const x = cx + R*Math.cos(th), y = cy - R*Math.sin(th);
+    s += '<circle class="s" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+rad.toFixed(1)+
+         '" fill="'+l.hex+'" style="animation-delay:'+(i*95)+'ms;transform-origin:'+
+         x.toFixed(1)+'px '+y.toFixed(1)+'px"/>';
+  });
+  s += '<rect x="'+(cx-26)+'" y="'+(cy+4)+'" width="52" height="9" rx="1.5" fill="#1F2B33"/>';
+  s += '<line x1="'+(cx-R-rad-16)+'" y1="'+(cy+16)+'" x2="'+(cx+R+rad+16)+'" y2="'+(cy+16)+
+       '" stroke="#1F2B33" stroke-width="2"/>';
+  s += '</svg>';
+  return s;
+}
+
+function renderCount(){
+  const { t, a } = RESULT;
+  const box = $("#screen-count");
+  box.innerHTML = "<h2>Auszählung im Wahlbüro Tannmatt</h2><p class='muted max70'>Alle " + VOTERS +
+    " Stimmzettel sind eingeworfen. " + t.total + " Parteistimmen sind zu verteilen, " +
+    t.panasch + " davon wurden panaschiert.</p>";
+
+  let s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 1</div><h2>Kandidatenstimmen</h2>" +
+    "<p class='muted small max70'>Jede beschriftete Zeile auf jedem Zettel ist eine Stimme – auch die " +
+    "von anderen Listen übernommenen.</p>";
+  const g = el("div");
+  g.style.cssText = "display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px";
+  LISTS.forEach(l => {
+    const tab = el("table");
+    let r = "<caption>" + sw(l.hex) + "Liste " + l.name + "</caption>" +
+      "<tr><th>Kandidat:in</th><th class='num'>Stimmen</th></tr>";
+    l.cands.forEach((c,i) => r += "<tr><td>" + c[0] + "</td><td class='num'>" + t.candVotes[l.id+(i+1)] + "</td></tr>");
+    r += "<tr><td class='muted'>Zusatzstimmen</td><td class='num'>" + t.zusatz[l.id] + "</td></tr>";
+    r += "<tr class='total'><td>Parteistimmen</td><td class='num'>" + t.party[l.id] + "</td></tr>";
+    tab.innerHTML = r; g.appendChild(tab);
+  });
+  s.appendChild(g);
+  const chk = el("div","notice");
+  chk.innerHTML = "<b>Kontrolle:</b> " + LISTS.map(l=>t.party[l.id]).join(" + ") + " = " + t.total +
+    ". Das muss " + VOTERS + " × " + SEATS + " = " + (VOTERS*SEATS) + " ergeben." +
+    (t.total === VOTERS*SEATS ? " Stimmt." : " Stimmt nicht.");
+  s.appendChild(chk); box.appendChild(s);
+
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 2</div><h2>Verteilungszahl</h2>" +
+    "<p class='muted small max70'>So viele Stimmen kostet ein Sitz in Tannmatt.</p>" +
+    "<div class='formula'>" + t.total + " ÷ (" + SEATS + " + 1) = " +
+    (t.total/(SEATS+1)).toFixed(2).replace(".",",") +
+    " → aufgerundet auf die nächsthöhere ganze Zahl → <b>" + a.vz + "</b></div>";
+  box.appendChild(s);
+
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 3</div><h2>Sitze direkt zuteilen</h2>" +
+    "<p class='muted small max70'>Parteistimmen geteilt durch die Verteilungszahl. Nachkommastellen fallen weg.</p>";
+  const t3 = el("table");
+  let r3 = "<tr><th>Liste</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + a.vz +
+    "</th><th class='num'>Sitze direkt</th></tr>";
+  const direct = {};
+  LISTS.forEach(l => {
+    const raw = t.party[l.id]/a.vz;
+    direct[l.id] = Math.min(Math.floor(raw), l.cands.length);
+    r3 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + t.party[l.id] +
+      "</td><td class='num'>" + raw.toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
+  });
+  const dsum = Object.values(direct).reduce((x,y)=>x+y,0);
+  r3 += "<tr class='total'><td>Total</td><td class='num'>" + t.total + "</td><td></td><td class='num'>" +
+    dsum + " von " + SEATS + "</td></tr>";
+  t3.innerHTML = r3; s.appendChild(t3);
+  const rest = SEATS - dsum;
+  const n3 = el("p","small muted");
+  n3.textContent = rest > 0
+    ? rest + (rest===1 ? " Sitz bleibt" : " Sitze bleiben") + " übrig."
+    : "Alle Sitze sind bereits vergeben – ein seltener Fall.";
+  s.appendChild(n3); box.appendChild(s);
+
+  if (a.log.length){
+    s = el("div","step");
+    s.innerHTML = "<div class='no'>Schritt 4</div><h2>Restsitze verteilen</h2>" +
+      "<p class='muted small max70'>Parteistimmen geteilt durch die Zahl der bereits erhaltenen Sitze " +
+      "plus eins. Das höchste Ergebnis bekommt den nächsten Sitz, dann wird neu gerechnet.</p>";
+    const t4 = el("table");
+    let head = "<tr><th>Liste</th>";
+    a.log.forEach(L => head += "<th class='num'>Restsitz " + L.round + "</th>");
+    head += "</tr>";
+    let body = "";
+    LISTS.forEach(l => {
+      body += "<tr><td>" + sw(l.hex) + l.name + "</td>";
+      a.log.forEach(L => {
+        const has = L.snapshot[l.id], capped = has >= l.cands.length;
+        const q = capped ? "–" : (t.party[l.id]/(has+1)).toFixed(2).replace(".",",");
+        const win = L.winner === l.id;
+        body += "<td class='num'" + (win ? " style='background:#DFE3DB;font-weight:700'" : "") + ">" +
+          q + (win ? " ✓" : "") + "</td>";
+      });
+      body += "</tr>";
+    });
+    let foot = "<tr class='total'><td>Sitz geht an</td>";
+    a.log.forEach(L => foot += "<td class='num'>" + listBy(L.winner).name + (L.lot ? " (Los)" : "") + "</td>");
+    foot += "</tr>";
+    t4.innerHTML = head + body + foot; s.appendChild(t4);
+    if (a.capped.length){
+      const c = el("p","small muted");
+      c.textContent = "Ein Strich bedeutet: Diese Liste hat keine weiteren Kandidierenden und kann keinen zusätzlichen Sitz annehmen.";
+      s.appendChild(c);
+    }
+    box.appendChild(s);
+  }
+
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 5</div><h2>Die Tannmatter Vertretung</h2>" + hemicycle(a.got);
+  const leg = el("div","legend");
+  leg.innerHTML = LISTS.map(l => "<span>" + sw(l.hex) + l.name + " " + a.got[l.id] + "</span>").join("");
+  s.appendChild(leg);
+  box.appendChild(s);
+
+  const row = el("div","btn-row");
+  const b = el("button","btn"); b.textContent = "Zur Auswertung";
+  b.onclick = () => { renderResult(); show("result"); $("#stamp").textContent = "Ergebnis"; };
+  row.appendChild(b); box.appendChild(row);
+}
+
+/* ==========================================================
+   AUSWERTUNG
+   ========================================================== */
+function renderResult(){
+  const { t, a } = RESULT;
+  const box = $("#screen-result");
+  box.innerHTML = "<h2>Was Tannmatt entschieden hat</h2>" + hemicycle(a.got);
+
+  const s1 = el("div","step");
+  s1.innerHTML = "<div class='no'>Wer einzieht</div><h2>Die sieben Gewählten</h2>" +
+    "<p class='muted small max70'>Innerhalb einer Liste entscheiden allein die Kandidatenstimmen. " +
+    "Die Reihenfolge auf dem gedruckten Zettel spielt keine Rolle.</p>";
+  const wrap = el("div","elected");
+  LISTS.forEach(l => {
+    if (!a.got[l.id]) return;
+    electedOf(l.id, a.got[l.id], t.candVotes).chosen.forEach(c => {
+      const d = el("div"); d.style.setProperty("--c", l.hex);
+      d.innerHTML = "<span><span class='li'>" + l.name + "</span><span class='nm'>" + c.name +
+        "</span><span class='job'> &nbsp;" + c.job + "</span></span>" +
+        "<span class='votes'>" + c.v + " Stimmen</span>";
+      wrap.appendChild(d);
+    });
+  });
+  s1.appendChild(wrap);
+  const out = LISTS.filter(l => !a.got[l.id]);
+  if (out.length){
+    const o = el("div","notice");
+    o.innerHTML = "<b>Ohne Sitz:</b> " + out.map(l =>
+      "Liste " + l.name + " – " + t.party[l.id] + " Parteistimmen, nötig wären rund " + a.vz +
+      " gewesen").join(". ") + ".";
+    s1.appendChild(o);
+  }
+  box.appendChild(s1);
+
+  const s2 = el("div","step");
+  s2.innerHTML = "<div class='no'>Der Vergleich</div><h2>Stimmenanteil und Sitzanteil</h2>";
+  const leg = el("div","legend");
+  leg.innerHTML = "<span><i></i>Stimmenanteil</span><span><i class='h'></i>Sitzanteil</span>";
+  s2.appendChild(leg);
+  LISTS.forEach(l => {
+    const v = t.party[l.id]/t.total*100, sS = a.got[l.id]/SEATS*100;
+    const r = el("div","barrow"); r.style.setProperty("--c", l.hex);
+    r.innerHTML = "<div class='barlab'>" + l.name + "</div><div class='barpair'>" +
+      "<div class='bar' style='width:" + Math.max(v,5) + "%'>" + pct(t.party[l.id], t.total) + "</div>" +
+      "<div class='bar hollow' style='width:" + Math.max(sS,5) + "%'>" + a.got[l.id] +
+      (a.got[l.id]===1?" Sitz":" Sitze") + "</div></div>";
+    s2.appendChild(r);
+  });
+  const rank = LISTS.slice().sort((x,y) =>
+    ((a.got[y.id]/SEATS)-(t.party[y.id]/t.total)) - ((a.got[x.id]/SEATS)-(t.party[x.id]/t.total)));
+  const note = el("p","small muted max70");
+  note.textContent = "Am stärksten übervertreten ist " + rank[0].name + ", am stärksten untervertreten " +
+    rank[rank.length-1].name + ". Je weniger Sitze ein Kanton hat, desto grösser wird dieser Unterschied.";
+  s2.appendChild(note); box.appendChild(s2);
+
+  const s3 = el("div","step");
+  s3.innerHTML = "<div class='no'>Gedankenexperiment</div><h2>Wäre Tannmatt ein anderer Kanton</h2>" +
+    "<p class='muted small max70'>Dieselben Stimmen, ein anderer Wahlkreis. Tannmatt hat sieben Sitze – " +
+    "aber in Uri wäre es einer und in Zürich über dreissig. Die Zeile mit sieben ist das echte Ergebnis, " +
+    "die anderen zeigen, was die Kantonsgrösse ausmacht.</p>";
+  const t5 = el("table");
+  let head = "<tr><th>Sitze</th>";
+  LISTS.forEach(l => head += "<th class='num'>" + sw(l.hex) + l.name + "</th>");
+  head += "<th class='num'>Verteilungszahl</th></tr>";
+  let body = "";
+  [1,3,5,7,9,15].forEach(n => {
+    const alt = allocate(t.party, n);
+    body += "<tr" + (n===SEATS ? " class='total'" : "") + "><td>" + n +
+      (n===SEATS ? " (Tannmatt)" : "") + "</td>";
+    LISTS.forEach(l => body += "<td class='num'>" + alt.got[l.id] + "</td>");
+    body += "<td class='num muted'>" + alt.vz + "</td></tr>";
+  });
+  t5.innerHTML = head + body; s3.appendChild(t5);
+  const cap = el("p","small muted max70");
+  cap.textContent = "Bei einem einzigen Sitz ist von Proporz nichts mehr übrig – dann gewinnt schlicht " +
+    "die stärkste Liste alles. Und GELB hat nur zwei Kandidierende, kann also nie mehr als zwei Sitze " +
+    "erhalten, egal wie gross der Kanton wäre.";
+  s3.appendChild(cap); box.appendChild(s3);
+
+  const s4 = el("div","step");
+  s4.innerHTML = "<div class='no'>Im Klassengespräch</div><h2>Fragen an Tannmatt</h2>";
+  const ol = el("ol","qlist");
+  [
+    "Jede Rolle wurde dreimal gespielt. Vergleicht die drei Zettel pro Rolle: Haben die drei Anna-Spielenden gleich gewählt? Was heisst das für Umfragen, die von Lebenslagen auf Wahlverhalten schliessen?",
+    "Welche Liste hat mehr Sitzanteil als Stimmenanteil? Zeigt im Rechenweg genau die Stelle, an der dieser Vorteil entsteht.",
+    "Wie viele zusätzliche Stimmen hätte die schwächste Liste für einen Sitz gebraucht? Rechnet es aus.",
+    "Bei einer Majorzwahl hätte die stärkste Liste alle sieben Sitze gewinnen können. Was spräche dafür, was dagegen?",
+    "In Tannmatt leben 341 800 Menschen, aber nur 236 400 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?",
+    "Wie viele Stimmen haben durch Panaschieren die Liste gewechselt? Wählen die Leute in Tannmatt eher eine Partei oder eher eine Person?",
+    "Anna wollte wegen der Wohnungsnot wählen. Sitzt jetzt jemand im Rat, der ihr Anliegen vertritt? Woran erkennt ihr das?"
+  ].forEach(q => { const li = el("li"); li.textContent = q; ol.appendChild(li); });
+  s4.appendChild(ol); box.appendChild(s4);
+
+  if (lotUsed){
+    const l = el("div","notice");
+    l.innerHTML = "<b>Losentscheid:</b> An mindestens einer Stelle waren zwei Ergebnisse exakt gleich. " +
+      "Das Programm hat gelost, wie es das Gesetz bei der Nationalratswahl vorsieht. Ein guter Moment " +
+      "für die Frage, ob Zufall in einer Wahl akzeptabel ist.";
+    box.appendChild(l);
+  }
+
+  const meth = el("div","notice");
+  meth.innerHTML = "<b>Zur Genauigkeit:</b> Nachgebildet ist das Hagenbach-Bischoff-Verfahren der " +
+    "schweizerischen Nationalratswahl. Nicht abgebildet sind Listenverbindungen, Unterlistenverbindungen " +
+    "und ungültige Stimmzettel. Mehrere Kantone verwenden für ihr Kantonsparlament ein anderes Verfahren. " +
+    "Die Verteilungszahl wird hier immer auf die nächsthöhere ganze Zahl aufgerundet, auch wenn die " +
+    "Division exakt aufgeht.";
+  box.appendChild(meth);
+
+  const row = el("div","btn-row noprint");
+  const again = el("button","btn"); again.textContent = "Neue Wahl in Tannmatt";
+  again.onclick = () => { $("#stamp").textContent = "Wahlbüro geschlossen"; show("start"); };
+  row.appendChild(again);
+  const pr = el("button","btn-ghost"); pr.textContent = "Ergebnis drucken";
+  pr.onclick = () => window.print(); row.appendChild(pr);
+  box.appendChild(row);
+}
+
+/* ========================================================== */
+renderPosters();
+renderRoleGrid();
+$("#go-vote").onclick = startVoting;
+$("#go-demo").onclick = demoAll;
+</script>
+</body>
+</html>
