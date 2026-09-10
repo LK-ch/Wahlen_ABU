@@ -223,6 +223,14 @@ details.ref[open] summary::before{content:"–"}
   border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0}
 .hidden{display:none}
 
+/* Erklärung zur Verteilungszahl */
+.warum{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0 14px}
+.warum > div{background:#F4F6F2;border:1px solid var(--rule);border-radius:2px;padding:11px 13px;
+  font-size:13.2px;line-height:1.45}
+.warum span{display:block;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:4px;
+  letter-spacing:-0.01em}
+@media (max-width:760px){ .warum{grid-template-columns:1fr;gap:9px} }
+
 @media (max-width:980px){ .posters{grid-template-columns:repeat(3,1fr)} .choose{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:860px){ .hero{grid-template-columns:1fr;gap:22px} .rolegrid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:640px){
@@ -322,9 +330,6 @@ details.ref[open] summary::before{content:"–"}
     <h2>Sechs Menschen aus Tannmatt</h2>
     <p class="max70">Diese sechs stehen für den ganzen Kanton. Wie sie sich entscheiden, entscheidet
     Tannmatt – jedes Beispiel steht für ein Sechstel der Stimmberechtigten.</p>
-    <p class="small muted max70">In einer Klasse von 18: sechs Gruppen zu dritt bilden, jede Gruppe
-    übernimmt ein Beispiel und einigt sich auf einen Stimmzettel. Das Aushandeln in der Gruppe ist
-    der halbe Lerneffekt.</p>
     <div class="rolegrid" id="rolegrid"></div>
     <div class="notice"><b>Es gibt keine richtige Lösung.</b> Jedes Beispiel bringt drei Anliegen mit,
     die selten alle auf dieselbe Liste passen. Genau dieses Abwägen ist die Aufgabe. Im Wahllokal
@@ -390,7 +395,7 @@ const LISTS = [
       ["Beatrice von Gunten",57, "Treuhänderin",              "Tannmatt"],
       ["Sandra Iten",        30, "Software-Unternehmerin",    "Tannmatt"],
       ["Jean-Marc Nicolet",  63, "Hotelier",                  "Val-Riond"],
-      ["Kilian Reber",       41, "Rechtsanwalt",              "Tannmatt"]
+      ["Kilian Reber",       34, "Filialleiter Warenhaus",    "Tannmatt"]
     ]},
   { id:"SVP", name:"SVP", full:"Schweizerische Volkspartei", hex:"#2F6B37",
     cands:[
@@ -407,40 +412,44 @@ const LISTS = [
 const ROLES = [
   { name:"Anna Vieira",
     bio:"19, Detailhandelsfachfrau im ersten Jahr. Wohnt bei den Eltern beim Bahnhof, sucht seit " +
-        "Monaten eine eigene Wohnung. Hat keinen Führerschein. Wählt zum ersten Mal.",
+        "Monaten eine eigene Wohnung. Tannmatt wächst, gebaut wird trotzdem kaum. Hat keinen " +
+        "Führerschein. Wählt zum ersten Mal.",
     anliegen:[
       "Eine Wohnung, die ich mit meinem Lohn zahlen kann",
-      "Höhere Löhne im Detailhandel",
+      "Nach Miete und Prämie bleibt mir fast nichts",
       "Abends von Tannmatt heimkommen, ohne Auto"],
-    tipp:"Drei der einundzwanzig Kandidierenden sind unter dreissig. Und: Kennt jemand auf den " +
-         "Listen die Arbeit im Verkauf oder in der Pflege aus eigener Erfahrung?" },
+    tipp:"Drei der einundzwanzig Kandidierenden sind unter dreissig. Und genau eine Person arbeitet " +
+         "selber im Detailhandel – schau nach, auf welcher Liste sie steht." },
 
   { name:"Werner Hofstetter",
     bio:"61, Chef einer Schreinerei in Tannmatt mit zwölf Angestellten. Findet seit drei Jahren " +
-        "keine Lernenden mehr. Wartete letztes Jahr sieben Monate auf eine Baubewilligung.",
+        "keine Lernenden. Wartete letztes Jahr sieben Monate auf eine Baubewilligung, der Strom " +
+        "für die Werkstatt hat sich fast verdoppelt.",
     anliegen:[
-      "Weniger Papierkram bei Bewilligungen",
-      "Tiefere Abgaben für kleine Betriebe",
-      "Mehr Jugendliche in die Berufslehre"],
+      "Weniger Vorschriften und weniger Papierkram",
+      "Tiefere Steuern, Abgaben und Gebühren für Betriebe",
+      "Bezahlbare Energie, sonst rechnet sich die Werkstatt nicht"],
     tipp:"Mehrere Kandidierende führen selber einen Betrieb. Schau nach, auf welchen Listen sie " +
          "stehen – und überlege, welche dieser Parteien deine Anliegen aufnimmt." },
 
   { name:"Rosmarie Gerber",
     bio:"73, Bäuerin im Hasental, hat den Hof an ihre Tochter übergeben. Der Bus ins Dorf fährt " +
-        "noch dreimal am Tag, die Poststelle ist seit zwei Jahren zu.",
+        "dreimal am Tag, die Poststelle ist seit zwei Jahren zu. Im Nachbartal hat der Wolf im " +
+        "Sommer Schafe gerissen.",
     anliegen:[
-      "Faire Preise für das, was der Hof produziert",
-      "Post und Bus im Dorf erhalten",
-      "Die AHV muss sicher bleiben"],
+      "Faire Preise und weniger Auflagen für die Höfe",
+      "Der Wolf gehört reguliert, sonst hört die Alpwirtschaft auf",
+      "Post, Bus und Arzt müssen auch auf dem Land bleiben"],
     tipp:"Zwei Landwirte kandidieren – auf zwei verschiedenen Listen. Aus dem Hasental stammen " +
          "überhaupt nur drei der einundzwanzig Personen." },
 
   { name:"Ramesh Thangarajah",
-    bio:"39, Ingenieur bei der Papierfabrik in Riedern. Der Betrieb hat Kurzarbeit angemeldet. " +
-        "Zwei Kinder gehen hier zur Schule, die Prämienrechnung kam letzte Woche.",
+    bio:"39, Ingenieur bei der Papierfabrik in Riedern. Der Betrieb hat Kurzarbeit angemeldet – " +
+        "die Energiekosten und die Konkurrenz aus dem Ausland drücken. Zwei Kinder gehen hier zur " +
+        "Schule, die Prämienrechnung kam letzte Woche.",
     anliegen:[
-      "Der Betrieb darf nicht schliessen, ich brauche die Stelle",
-      "Krippenplätze und Unterstützung für Familien",
+      "Die Fabrik muss bleiben und darf nicht ins Ausland ziehen",
+      "Strom und Energie müssen bezahlbar sein",
       "Die Krankenkassenprämien steigen jedes Jahr"],
     tipp:"Eine kandidierende Person hat selber in der Papierfabrik gearbeitet. Und aus Riedern " +
          "stammen fünf der einundzwanzig." },
@@ -450,20 +459,20 @@ const ROLES = [
         "die Ernte fiel um ein Drittel kleiner aus. Verkauft die Hälfte direkt ab Hof.",
     anliegen:[
       "Die Sommer werden zu trocken – das ist mein Betrieb",
-      "Wasser für die Landwirtschaft, auch im August",
-      "Weniger Vorschriften beim Direktverkauf"],
-    tipp:"Deine Anliegen ziehen in zwei Richtungen: Klima und Betrieb stehen selten auf derselben " +
-         "Liste. Aus Val-Riond kandidiert übrigens genau eine Person pro Liste – fünf insgesamt." },
+      "Wasser und Boden für die Landwirtschaft sichern",
+      "Weniger Auflagen für kleine Betriebe wie meinen"],
+    tipp:"Deine Anliegen ziehen in zwei Richtungen: Klimaschutz und weniger Vorschriften stehen " +
+         "selten auf derselben Liste. Aus Val-Riond kandidiert genau eine Person pro Liste." },
 
   { name:"Nadia Ghebremariam",
-    bio:"24, Fachfrau Betreuung im Altersheim Tannmatt, Schichtdienst mit Wochenenden. Vor zwei " +
-        "Jahren eingebürgert und deshalb neu stimmberechtigt.",
+    bio:"24, Fachfrau Betreuung im Altersheim Tannmatt. Spätdienst bis zweiundzwanzig Uhr, danach " +
+        "zwanzig Minuten zu Fuss durch die Bahnunterführung. Vor zwei Jahren eingebürgert.",
     anliegen:[
       "Bessere Löhne und Dienstpläne in der Pflege",
-      "Genug Personal in den Altersheimen",
-      "In der Politik sollen auch Leute wie ich vorkommen"],
+      "Nachts sicher nach Hause kommen",
+      "Genug Personal in den Altersheimen"],
     tipp:"Drei Kandidierende arbeiten im Gesundheits- oder Betreuungsbereich, verteilt auf zwei " +
-         "Listen. Schau auch auf Alter und Herkunft der Namen." }
+         "Listen. Und einer der einundzwanzig ist Polizist." }
 ];
 const ELECTORATE = 236406;              // Stimmberechtigte in Tannmatt
 const VOTERS = ROLES.length;            // 6 Beispiele
@@ -619,7 +628,7 @@ function renderBallot(){
       ll.cands.forEach((c,k) => {
         const o = el("option");
         o.value = ll.id+(k+1);
-        o.textContent = c[0] + " — " + shortOf(c) + "  (" + ll.id+(k+1) + ")";
+        o.textContent = c[0] + " — " + jobOf(c) + "  (" + ll.id+(k+1) + ")";
         og.appendChild(o);
       });
       sel.appendChild(og);
@@ -828,7 +837,7 @@ function renderCount(){
     ranked[l.id].forEach(c => {
       const win = elected.some(e => e.code === c.code);
       r += "<tr" + (win ? " class='win'" : "") + "><td>" + c.name + (win ? " ✓" : "") +
-        "<span class='sub'>" + c.short + "</span></td><td class='num'>" + fmt(c.v) + "</td></tr>";
+        "<span class='sub'>" + c.job + "</span></td><td class='num'>" + fmt(c.v) + "</td></tr>";
     });
     tab.innerHTML = r; g.appendChild(tab);
   });
@@ -913,7 +922,21 @@ function renderCount(){
     "<div class='formula'>" + fmt(t.total) + " ÷ (" + SEATS + " + 1) = " +
     fmt((t.total/(SEATS+1)).toFixed(2).split(".")[0]) + "," + (t.total/(SEATS+1)).toFixed(2).split(".")[1] +
     " → aufgerundet → <b>" + fmt(a.vz) + "</b> Stimmen pro Sitz</div>" +
-    "<p class='muted small max70'>Diese Zahl heisst Verteilungszahl.</p>";
+    "<p class='muted small max70'>Diese Zahl heisst Verteilungszahl.</p>" +
+    "<div class='notice'><b>Warum wird durch acht geteilt und nicht durch sieben?</b>" +
+    "<div class='warum'>" +
+      "<div><span>Durch 7?</span>Dann wäre ein Sitz teuer. Kaum eine Partei käme auf so viele " +
+      "Stimmen, fast alle Sitze müssten über die Restverteilung vergeben werden.</div>" +
+      "<div><span>Durch 9 oder 10?</span>Dann wäre ein Sitz so billig, dass ihn mehr als sieben " +
+      "Parteien erreichen könnten. Man müsste Sitze vergeben, die es gar nicht gibt.</div>" +
+      "<div><span>Darum 7 + 1</span>Acht Parteien können unmöglich alle mehr als einen Achtel der " +
+      "Stimmen haben – acht Achtel sind ja bereits alles. Höchstens sieben schaffen es über die " +
+      "Verteilungszahl. Genau sieben Sitze sind zu vergeben.</div>" +
+    "</div>" +
+    "<b style='display:block;margin-top:4px'>Dasselbe mit kleinen Zahlen</b>" +
+    "80 Stimmen, 7 Sitze. 80 ÷ 8 = 10, aufgerundet kostet ein Sitz also 11 Stimmen. Eine Partei mit " +
+    "33 Stimmen bekommt damit sofort 3 Sitze. Würde man durch 7 teilen, käme ein Sitz auf 12 Stimmen " +
+    "– dieselbe Partei bekäme nur 2, obwohl ihr mehr als 40 Prozent aller Stimmen gehören.</div>";
   box.appendChild(s);
 
   /* --- 5 direkte Sitze --- */
@@ -921,14 +944,15 @@ function renderCount(){
   s.innerHTML = "<div class='no'>Schritt 5</div><h2>Sitze verteilen</h2>" +
     "<p class='muted small max70'>Parteistimmen geteilt durch die Verteilungszahl. Nachkommastellen fallen weg.</p>";
   const t5 = el("table");
-  let r5 = "<tr><th>Partei</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + fmt(a.vz) +
-    "</th><th class='num'>Sitze</th></tr>";
+  let r5 = "<tr><th>Partei</th><th class='num'>Parteistimmen</th>" +
+    "<th class='num'>÷ Verteilungszahl<span class='sub'>" + fmt(a.vz) + "</span></th>" +
+    "<th class='num'>Sitze</th></tr>";
   const direct = {};
   LISTS.forEach(l => {
     const raw = t.party[l.id]/a.vz;
     direct[l.id] = Math.min(Math.floor(raw), l.cands.length);
     r5 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + fmt(t.party[l.id]) + "</td><td class='num'>" +
-      raw.toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
+      (Math.floor(raw*100)/100).toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
   });
   const dsum = Object.values(direct).reduce((x,y)=>x+y,0);
   r5 += "<tr class='total'><td>Total</td><td class='num'>" + fmt(t.total) + "</td><td></td><td class='num'>" +
