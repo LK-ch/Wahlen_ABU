@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anna wählt – Proporzwahl im Kanton Tannmatt</title>
+<title>Anna wählt – Nationalratswahl im Kanton Tannmatt</title>
 <style>
 :root{
   --paper:#E6E9E4;
@@ -12,10 +12,6 @@
   --muted:#68767E;
   --rule:#CBCFC6;
   --rule-strong:#8F9891;
-  --rot:#C1121F;
-  --blau:#0353A4;
-  --gruen:#2D6A4F;
-  --gelb:#A97400;
   --water:#9FBFCB;
   --land:#DCE0D6;
   --focus:#0353A4;
@@ -70,22 +66,20 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
   padding:20px 24px;margin:34px 0 8px;border-radius:2px;max-width:74ch}
 .anna h3{margin-bottom:6px}
 
-.posters{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:22px}
+/* Parteikarten */
+.posters{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-top:20px}
 .poster{border-radius:2px;overflow:hidden;border:1px solid var(--rule);background:var(--sheet);
   display:flex;flex-direction:column}
-.poster .top{background:var(--c);color:#fff;padding:16px 16px 18px;min-height:132px;
-  display:flex;flex-direction:column;justify-content:space-between}
-.poster .nm{font-size:13px;font-weight:700;letter-spacing:.12em;opacity:.88}
-.poster .slogan{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.08;
-  letter-spacing:-0.03em;margin-top:8px}
-.poster .body{padding:12px 15px 15px}
-.poster .tag{font-size:12.5px;color:var(--muted);line-height:1.4;margin-bottom:10px}
-.poster ul{margin:0;padding:0;list-style:none;font-size:13.5px}
-.poster li{padding:5px 0;border-top:1px solid var(--rule);line-height:1.3}
-.poster li b{color:var(--c);font-variant-numeric:tabular-nums;margin-right:6px}
-.poster li i{display:block;font-style:normal;font-size:11.5px;color:var(--muted)}
+.poster .top{background:var(--c);color:#fff;padding:15px 15px 16px}
+.poster .abbr{font-size:clamp(24px,3vw,31px);font-weight:700;letter-spacing:-0.04em;line-height:1}
+.poster .full{font-size:11.5px;line-height:1.3;margin-top:5px;opacity:.92}
+.poster .body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
+.poster .tag{font-size:12.5px;color:var(--muted);line-height:1.42;margin-bottom:10px}
+.poster ul{margin:0;padding:0;list-style:none;font-size:13px}
+.poster li{padding:5px 0;border-top:1px solid var(--rule);line-height:1.28}
+.poster li b{color:var(--c);font-variant-numeric:tabular-nums;margin-right:5px;font-size:11.5px}
+.poster li i{display:block;font-style:normal;font-size:11px;color:var(--muted)}
 
-/* Rollenkarten auf der Startseite */
 .rolegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
 .rolecard{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
   padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px}
@@ -100,7 +94,6 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
   display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;
   letter-spacing:-0.03em}
 
-/* Wahlgang */
 .progress{display:flex;gap:3px;margin:10px 0 24px;align-items:center}
 .pip{height:10px;background:var(--rule);border-radius:1px;flex:1;min-width:7px}
 .pip[data-done="1"]{background:var(--ink)}
@@ -112,13 +105,13 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
 .role .who{font-size:20px;font-weight:700;letter-spacing:-0.02em}
 .role .bio{font-size:14.5px;color:var(--muted);line-height:1.4;max-width:62ch}
 
-.choose{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 6px}
+.choose{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin:14px 0 6px}
 .choose button{background:var(--sheet);border:1.5px solid var(--rule);border-top:7px solid var(--c);
-  padding:15px 15px 16px;text-align:left}
+  padding:14px 13px 15px;text-align:left}
 .choose button:hover{border-color:var(--c)}
-.choose .cn{font-weight:700;font-size:18px;color:var(--c);letter-spacing:-0.02em}
-.choose .cs{font-size:13px;color:var(--ink);margin-top:3px;line-height:1.3}
-.choose .cc{font-size:12px;color:var(--muted);margin-top:6px}
+.choose .cn{font-weight:700;font-size:20px;color:var(--c);letter-spacing:-0.03em}
+.choose .cs{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.35}
+.choose .cc{font-size:11.5px;color:var(--muted);margin-top:7px}
 
 .ballot{background:var(--sheet);border:1px solid var(--rule);border-top:9px solid var(--c);
   border-radius:2px;margin-top:18px}
@@ -128,13 +121,13 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
 .line{display:flex;align-items:center;gap:12px;padding:9px 19px;border-bottom:1px solid var(--rule)}
 .line .n{font-weight:700;font-variant-numeric:tabular-nums;min-width:1.3em;color:var(--muted)}
 select{font:inherit;font-size:15px;padding:8px 9px;border:1px solid var(--rule-strong);
-  border-radius:2px;background:#fff;color:var(--ink);width:100%;max-width:470px}
+  border-radius:2px;background:#fff;color:var(--ink);width:100%;max-width:480px}
 select.foreign{border-color:var(--fc);color:var(--fc);font-weight:600}
 select.blank{color:var(--muted);font-style:italic}
 .badge{font-size:11.5px;font-weight:700;color:var(--fc);border:1.5px solid var(--fc);
   padding:2px 7px;border-radius:2px;white-space:nowrap}
 .ballot-foot{padding:15px 19px 19px;background:#FBFBF8}
-.warn{background:#FFF2F2;border:1.5px solid var(--rot);color:var(--rot);padding:10px 13px;
+.warn{background:#FFF2F2;border:1.5px solid #C60C30;color:#C60C30;padding:10px 13px;
   font-size:14px;font-weight:600;border-radius:2px;margin-bottom:12px}
 .hint{font-size:13.5px;color:var(--muted);line-height:1.5;max-width:72ch}
 
@@ -144,6 +137,7 @@ th,td{border:1px solid var(--rule);padding:7px 10px;text-align:left}
 th{background:#DFE3DB;font-weight:700}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr.total td{background:#DFE3DB;font-weight:700}
+tr.win td{background:#F3F6F0;font-weight:700}
 .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;background:var(--c)}
 
 .step{border-top:2px solid var(--ink);padding-top:17px;margin-top:34px}
@@ -158,22 +152,22 @@ tr.total td{background:#DFE3DB;font-weight:700}
 }
 @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
 
-.barrow{display:grid;grid-template-columns:76px 1fr;gap:13px;align-items:center;margin-bottom:15px}
-.barlab{font-weight:700;color:var(--c);font-size:15px}
+.barrow{display:grid;grid-template-columns:64px 1fr;gap:13px;align-items:center;margin-bottom:15px}
+.barlab{font-weight:700;color:var(--c);font-size:15px;letter-spacing:-0.02em}
 .bar{height:20px;background:var(--c);border-radius:1px;min-width:3px;display:flex;
   align-items:center;padding-left:8px;color:#fff;font-size:12px;font-weight:700;white-space:nowrap}
 .bar.hollow{background:transparent;border:2px solid var(--c);color:var(--c);padding-left:6px}
 .barpair{display:flex;flex-direction:column;gap:4px}
-.legend{display:flex;gap:20px;font-size:13px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
 .legend i{display:inline-block;width:15px;height:11px;background:var(--muted);margin-right:6px}
 .legend i.h{background:transparent;border:2px solid var(--muted)}
 
-.elected{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;margin:12px 0}
+.elected{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;margin:14px 0}
 .elected div{padding:11px 17px;border-bottom:1px solid var(--rule);display:flex;
   justify-content:space-between;gap:14px;align-items:baseline}
 .elected div:last-child{border-bottom:0}
 .elected .nm{font-weight:700}
-.elected .li{color:var(--c);font-weight:700;margin-right:9px}
+.elected .li{color:var(--c);font-weight:700;margin-right:9px;display:inline-block;min-width:44px}
 .elected .job{color:var(--muted);font-size:13.5px}
 .elected .votes{color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
 
@@ -187,22 +181,16 @@ tr.total td{background:#DFE3DB;font-weight:700}
   border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0;max-width:76ch}
 .hidden{display:none}
 
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:22px}
+@media (max-width:980px){ .posters{grid-template-columns:repeat(3,1fr)} .choose{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:860px){ .hero{grid-template-columns:1fr;gap:22px} .rolegrid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){
   .posters{grid-template-columns:repeat(2,1fr)}
   .choose{grid-template-columns:repeat(2,1fr)}
-  .rolegrid{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:540px){
-  .posters{grid-template-columns:1fr}
-  .choose{grid-template-columns:1fr}
   .rolegrid{grid-template-columns:1fr}
   .role{flex-direction:column;align-items:flex-start;gap:12px}
   .line{flex-wrap:wrap}
 }
-@media print{
-  body{background:#fff}.noprint{display:none!important}.wrap{max-width:100%;padding:0}
-}
+@media print{ body{background:#fff}.noprint{display:none!important}.wrap{max-width:100%;padding:0} }
 </style>
 </head>
 <body>
@@ -219,9 +207,7 @@ tr.total td{background:#DFE3DB;font-weight:700}
   <div class="stamp" id="stamp">Wahlbüro geschlossen</div>
 </div>
 
-<!-- ================= START ================= -->
 <section id="screen-start">
-
   <div class="hero">
     <div>
       <h1>Anna<br>wählt</h1>
@@ -238,26 +224,19 @@ tr.total td{background:#DFE3DB;font-weight:700}
     <svg class="map" viewBox="0 0 400 310" role="img" aria-label="Karte des fiktiven Kantons Tannmatt mit Hauptort, drei Bezirken und dem Tannsee">
       <path d="M62 44 L132 24 L201 38 L258 22 L322 58 L356 112 L341 178 L361 233 L299 278 L224 264 L159 283 L96 252 L71 192 L41 142 Z"
             fill="var(--land)" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-      <path d="M201 38 C 196 110 188 170 176 262" fill="none" stroke="var(--rule-strong)"
-            stroke-width="1.3" stroke-dasharray="6 5"/>
-      <path d="M196 118 C 250 128 300 132 349 130" fill="none" stroke="var(--rule-strong)"
-            stroke-width="1.3" stroke-dasharray="6 5"/>
+      <path d="M201 38 C 196 110 188 170 176 262" fill="none" stroke="var(--rule-strong)" stroke-width="1.3" stroke-dasharray="6 5"/>
+      <path d="M196 118 C 250 128 300 132 349 130" fill="none" stroke="var(--rule-strong)" stroke-width="1.3" stroke-dasharray="6 5"/>
       <path d="M186 196 C 214 182 254 188 266 210 C 275 231 246 249 214 243 C 188 238 172 214 186 196 Z"
             fill="var(--water)" stroke="#7CA0AE" stroke-width="1.4"/>
-      <path d="M133 27 C 148 78 158 132 186 197" fill="none" stroke="var(--water)" stroke-width="3.4"
-            stroke-linecap="round"/>
-      <path d="M258 236 C 276 254 292 266 300 277" fill="none" stroke="var(--water)" stroke-width="3.4"
-            stroke-linecap="round"/>
+      <path d="M133 27 C 148 78 158 132 186 197" fill="none" stroke="var(--water)" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M258 236 C 276 254 292 266 300 277" fill="none" stroke="var(--water)" stroke-width="3.4" stroke-linecap="round"/>
       <circle cx="150" cy="150" r="7" fill="var(--ink)"/>
       <circle cx="150" cy="150" r="12.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
       <text class="lbl" x="169" y="147">TANNMATT</text>
       <text class="lbl-s" x="169" y="161">Hauptort</text>
-      <circle cx="272" cy="72" r="4" fill="var(--ink)"/>
-      <text class="lbl-s" x="282" y="76">RIEDERN</text>
-      <circle cx="303" cy="163" r="4" fill="var(--ink)"/>
-      <text class="lbl-s" x="242" y="167">VAL-RIOND</text>
-      <circle cx="112" cy="238" r="4" fill="var(--ink)"/>
-      <text class="lbl-s" x="122" y="242">HASENTAL</text>
+      <circle cx="272" cy="72" r="4" fill="var(--ink)"/><text class="lbl-s" x="282" y="76">RIEDERN</text>
+      <circle cx="303" cy="163" r="4" fill="var(--ink)"/><text class="lbl-s" x="242" y="167">VAL-RIOND</text>
+      <circle cx="112" cy="238" r="4" fill="var(--ink)"/><text class="lbl-s" x="122" y="242">HASENTAL</text>
       <text class="wlbl" x="203" y="220">Tannsee</text>
       <text class="lbl-s" x="41" y="298" fill="var(--muted)">20 km</text>
       <path d="M41 289 h56" stroke="var(--muted)" stroke-width="1.6"/>
@@ -270,9 +249,9 @@ tr.total td{background:#DFE3DB;font-weight:700}
     <p style="margin:0">Anna Vieira ist in Tannmatt aufgewachsen, hat letzten Sommer die Lehre im
     Detailhandel abgeschlossen und wohnt noch bei ihren Eltern in einem Block beim Bahnhof. Ihre Miete
     wäre bezahlbar, wenn sie eine Wohnung fände. Vor zwei Wochen lag das Wahlmaterial im Briefkasten:
-    vier Listen, achtzehn Namen, sieben Sitze. Anna weiss nicht, wo sie anfangen soll.</p>
-    <p class="small muted" style="margin:10px 0 0">Der Kanton Tannmatt, seine Bezirke und alle
-    Personen in dieser Simulation sind erfunden. Das Wahlverfahren ist echt.</p>
+    fünf Listen, einundzwanzig Namen, sieben Sitze. Anna weiss nicht, wo sie anfangen soll.</p>
+    <p class="small muted" style="margin:10px 0 0">Der Kanton Tannmatt und alle Kandidierenden sind
+    erfunden. Die fünf Parteien und das Wahlverfahren sind echt.</p>
   </div>
 
   <div class="step">
@@ -280,16 +259,20 @@ tr.total td{background:#DFE3DB;font-weight:700}
     <h2>Sieben Sitze</h2>
     <p class="max70">Tannmatt hat 341 800 Einwohnende und damit sieben der 200 Nationalratssitze.
     Sieben Sitze heissen: Eine Liste braucht rund einen Achtel aller Stimmen, also etwa 12,5 Prozent,
-    um einen Sitz zu holen. Diese Hürde steht in keinem Gesetz. Sie ergibt sich allein aus der
-    Rechnung.</p>
+    um einen Sitz zu holen. Diese Hürde steht in keinem Gesetz. Sie ergibt sich allein aus der Rechnung.</p>
     <p class="small muted max70">Jede stimmberechtigte Person hat sieben Stimmen. Im Spiel sind das
     18 × 7 = 126 Parteistimmen.</p>
   </div>
 
   <div class="step">
     <div class="no">Auf dem Stimmzettel</div>
-    <h2>Vier Listen, achtzehn Namen</h2>
+    <h2>Fünf Listen, einundzwanzig Namen</h2>
     <div class="posters" id="posters"></div>
+    <div class="notice"><b>Zu den Kurzprofilen:</b> Die Zeilen unter den Parteinamen sind stark
+    vereinfachte Zusammenfassungen für den Unterricht und ersetzen keine Parteiprogramme. Wer genauer
+    hinschauen will: die Websites der Parteien oder ein Wahlhilfe-Tool wie smartvote. Alle
+    einundzwanzig Kandidierenden sind frei erfunden; Übereinstimmungen mit lebenden Personen wären
+    zufällig.</div>
   </div>
 
   <div class="step">
@@ -298,8 +281,8 @@ tr.total td{background:#DFE3DB;font-weight:700}
     <p class="max70">Achtzehn Personen stimmen ab, aber es gibt nur sechs Rollen. Jede Rolle wird
     dreimal gespielt – von drei verschiedenen Menschen in derselben Lage. Ob die drei gleich wählen,
     ist die eigentliche Frage.</p>
-    <p class="small muted max70">In einer Klasse von 18: jede Rollenkarte dreimal ausdrucken oder
-    dreimal vergeben. Nach der Wahl vergleichen, was die drei Anna-Spielenden angekreuzt haben.</p>
+    <p class="small muted max70">In einer Klasse von 18: jede Rollenkarte dreimal vergeben. Nach der
+    Wahl vergleichen, was die drei Anna-Spielenden angekreuzt haben.</p>
     <div class="rolegrid" id="rolegrid"></div>
     <div class="btn-row">
       <button class="btn" id="go-vote">Wahllokal öffnen</button>
@@ -308,7 +291,6 @@ tr.total td{background:#DFE3DB;font-weight:700}
   </div>
 </section>
 
-<!-- ================= WAHL ================= -->
 <section id="screen-vote" class="hidden">
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="role" id="role"></div>
@@ -321,10 +303,7 @@ tr.total td{background:#DFE3DB;font-weight:700}
   <div id="step-fill" class="hidden"></div>
 </section>
 
-<!-- ================= AUSZÄHLUNG ================= -->
 <section id="screen-count" class="hidden"></section>
-
-<!-- ================= AUSWERTUNG ================= -->
 <section id="screen-result" class="hidden"></section>
 
 </div>
@@ -333,42 +312,51 @@ tr.total td{background:#DFE3DB;font-weight:700}
 "use strict";
 
 /* ==========================================================
-   KANTON TANNMATT – alle Personen und Orte sind erfunden
+   Parteien in der Reihenfolge der Sitzordnung im Nationalrat
+   (links nach rechts). Kurzprofile stark vereinfacht.
+   Alle Kandidierenden sind erfunden.
    ========================================================== */
 const LISTS = [
-  { id:"R", name:"ROT", hex:"#C1121F", slogan:"Eine Wohnung, die man zahlen kann.",
-    tag:"Bezahlbarer Wohnraum, mehr Lehrstellen, besserer Schutz bei Krankheit.",
+  { id:"SP", name:"SP", full:"Sozialdemokratische Partei", hex:"#C60C30",
+    tag:"Sozialer Ausgleich, tiefere Krankenkassenprämien, bezahlbares Wohnen, Gleichstellung, Klimaschutz.",
     cands:[
       ["Amina Tesfay","34, Primarlehrerin, Tannmatt"],
       ["Reto Zurbriggen","51, Maurer und Gewerkschafter, Hasental"],
       ["Luana Fernandes","28, Pflegefachfrau, Tannmatt"],
-      ["Kemal Yilmaz","45, Chemielaborant, Riedern"],
       ["Céline Jaquier","39, Sozialarbeiterin, Val-Riond"],
       ["Marco De Luca","62, Rentner, früher Papierfabrik"]
     ]},
-  { id:"B", name:"BLAU", hex:"#0353A4", slogan:"Weniger Vorschriften. Mehr Betriebe.",
-    tag:"Tiefere Steuern, schlankere Verwaltung, starkes Gewerbe in den Tälern.",
-    cands:[
-      ["Beatrice von Gunten","57, Treuhänderin, Tannmatt"],
-      ["Driton Krasniqi","41, Bauunternehmer, Riedern"],
-      ["Andreas Hodel","49, Landwirt, Hasental"],
-      ["Priya Rajeswaran","36, Zahnärztin, Tannmatt"],
-      ["Jean-Marc Nicolet","63, Hotelier, Val-Riond"],
-      ["Sandra Bernasconi","30, Software-Unternehmerin, Tannmatt"]
-    ]},
-  { id:"G", name:"GRÜN", hex:"#2D6A4F", slogan:"Der letzte Bus fährt um Mitternacht.",
-    tag:"Nachtbus in alle Täler, Solardächer auf Schulhäusern, kein Bauland mehr am Tannsee.",
+  { id:"GPS", name:"Grüne", full:"Grüne Partei der Schweiz", hex:"#6F8C10",
+    tag:"Klima- und Umweltschutz, Biodiversität, Verkehrswende, Schutz von Landschaft und Boden.",
     cands:[
       ["Nuray Öztürk","33, Biologin, Val-Riond"],
-      ["Noah Aebischer","24, Student der Umweltwissenschaften"],
-      ["Lukas Wang","47, Architekt, Tannmatt"],
+      ["Noah Gerber","24, Student der Umweltwissenschaften"],
       ["Fatima Ahmadi","29, Velomechanikerin, Riedern"]
     ]},
-  { id:"Y", name:"GELB", hex:"#A97400", slogan:"Stimmrecht ab sechzehn.",
-    tag:"Politik ohne Papierkram, digitale Verwaltung, Stimmrechtsalter 16.",
+  { id:"MIT", name:"Mitte", full:"Die Mitte", hex:"#C1611A",
+    tag:"Ausgleich zwischen den Polen, Familien, Sicherung von AHV und Krankenversicherung, Service public in den Regionen.",
     cands:[
-      ["Vincent Perrin","22, Mediamatiker, Val-Riond"],
-      ["Sanja Jovanović","26, Datenanalystin, Tannmatt"]
+      ["Priya Rajeswaran","36, Zahnärztin, Tannmatt"],
+      ["Andreas Hodel","49, Landwirt, Hasental"],
+      ["Chantal Marchon","44, Spitex-Leiterin, Val-Riond"],
+      ["Ivan Bernasconi","55, Gemeindepräsident, Riedern"]
+    ]},
+  { id:"FDP", name:"FDP", full:"FDP.Die Liberalen", hex:"#0E52A0",
+    tag:"Unternehmertum und Gewerbe, weniger Regulierung, gesunde Bundesfinanzen, individuelle Verantwortung.",
+    cands:[
+      ["Beatrice von Gunten","57, Treuhänderin, Tannmatt"],
+      ["Sandra Iten","30, Software-Unternehmerin, Tannmatt"],
+      ["Jean-Marc Nicolet","63, Hotelier, Val-Riond"],
+      ["Kilian Reber","41, Rechtsanwalt, Tannmatt"]
+    ]},
+  { id:"SVP", name:"SVP", full:"Schweizerische Volkspartei", hex:"#2F6B37",
+    tag:"Begrenzung der Zuwanderung, Unabhängigkeit gegenüber der EU, tiefe Steuern und Abgaben, starke Landwirtschaft.",
+    cands:[
+      ["Driton Krasniqi","41, Bauunternehmer, Riedern"],
+      ["Ueli Stampfli","58, Landwirt und Metzger, Hasental"],
+      ["Karin Hofstetter","47, Gärtnereibetrieb, Riedern"],
+      ["Bruno Zwahlen","52, Transportunternehmer, Tannmatt"],
+      ["Sven Lüthi","35, Polizist, Val-Riond"]
     ]}
 ];
 
@@ -383,47 +371,48 @@ const ROLES = [
 ];
 const ROUNDS = 3;
 const VOTERS = ROLES.length * ROUNDS;   // 18
-const SEATS = 7;                        // Tannmatt hat sieben Sitze
+const SEATS  = 7;
+
+/* Gewichtung nur für den Zufallsmodus – grob an schweizerischen
+   Grössenverhältnissen orientiert, ohne Anspruch auf Genauigkeit. */
+const WEIGHTS = [["SVP",.30],["SP",.21],["MIT",.17],["FDP",.17],["GPS",.15]];
 
 const CANDS = [];
 LISTS.forEach(l => l.cands.forEach((c,i) => CANDS.push({
   code:l.id+(i+1), name:c[0], job:c[1], list:l.id })));
 const candBy = c => CANDS.find(x => x.code === c);
 const listBy = id => LISTS.find(l => l.id === id);
-const roleAt = i => ({ role: ROLES[i % ROLES.length], nr: (i % ROLES.length)+1,
-                       round: Math.floor(i / ROLES.length)+1 });
+const roleAt = i => ({ role:ROLES[i % ROLES.length], nr:(i % ROLES.length)+1,
+                       round:Math.floor(i / ROLES.length)+1 });
 
-/* ==========================================================
-   ZUSTAND
-   ========================================================== */
 let ballots = [], cur = 0, curList = null, curSlots = [], lotUsed = false;
 
 const $ = s => document.querySelector(s);
 const el = (t,c) => { const e = document.createElement(t); if(c) e.className = c; return e; };
 function show(id){
-  ["start","vote","count","result"].forEach(s =>
-    $("#screen-"+s).classList.toggle("hidden", s !== id));
+  ["start","vote","count","result"].forEach(s => $("#screen-"+s).classList.toggle("hidden", s !== id));
   window.scrollTo({top:0, behavior:"instant"});
 }
 const initials = n => n.split(" ").map(w => w[0]).join("").slice(0,2);
+const pct = (x,of) => (of ? (x/of*100) : 0).toFixed(1).replace(".",",") + " %";
+const sw  = hex => '<span class="swatch" style="--c:'+hex+'"></span>';
 
-/* ==========================================================
-   START
-   ========================================================== */
+/* ================== START ================== */
 function renderPosters(){
   const box = $("#posters"); box.innerHTML = "";
-  LISTS.forEach(l => {
+  LISTS.forEach((l,li) => {
     const p = el("div","poster"); p.style.setProperty("--c", l.hex);
     const top = el("div","top");
-    top.innerHTML = "<div class='nm'>LISTE " + l.name + "</div><div class='slogan'>" + l.slogan + "</div>";
+    top.innerHTML = "<div class='abbr'>" + l.name + "</div><div class='full'>Liste " + (li+1) +
+      " &middot; " + l.full + "</div>";
     p.appendChild(top);
     const body = el("div","body");
     const tg = el("div","tag"); tg.textContent = l.tag; body.appendChild(tg);
     const ul = el("ul");
     l.cands.forEach((c,i) => {
-      const li = el("li");
-      li.innerHTML = "<b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + c[1] + "</i>";
-      ul.appendChild(li);
+      const li2 = el("li");
+      li2.innerHTML = "<b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + c[1] + "</i>";
+      ul.appendChild(li2);
     });
     body.appendChild(ul); p.appendChild(body); box.appendChild(p);
   });
@@ -439,20 +428,16 @@ function renderRoleGrid(){
     c.appendChild(hd);
     const b = el("div","bio"); b.textContent = bio; c.appendChild(b);
     const x = el("div","x3"); x.textContent = "Rolle " + (i+1) + " — dreimal zu vergeben";
-    c.appendChild(x);
-    box.appendChild(c);
+    c.appendChild(x); box.appendChild(c);
   });
 }
 
-/* ==========================================================
-   WAHLGANG
-   ========================================================== */
+/* ================== WAHLGANG ================== */
 function startVoting(){
   ballots = []; cur = 0; lotUsed = false;
   $("#stamp").textContent = "Wahllokal offen";
   show("vote"); nextVoter();
 }
-
 function nextVoter(){
   if (cur >= VOTERS){ $("#stamp").textContent = "Auszählung"; runCount(); return; }
   curList = null; curSlots = [];
@@ -460,7 +445,6 @@ function nextVoter(){
   $("#step-list").classList.remove("hidden");
   renderProgress(); renderRole(); renderChoose();
 }
-
 function renderProgress(){
   const p = $("#progress"); p.innerHTML = "";
   for (let i=0;i<VOTERS;i++){
@@ -471,31 +455,27 @@ function renderProgress(){
     p.appendChild(d);
   }
 }
-
 function renderRole(){
   const { role, nr, round } = roleAt(cur);
   const [name, bio] = role;
   const r = $("#role"); r.innerHTML = "";
   const m = el("div","mono"); m.textContent = initials(name); r.appendChild(m);
   const t = el("div");
-  t.innerHTML = "<div class='muted small'>Rolle " + nr + " von " + ROLES.length +
-    " &nbsp;·&nbsp; " + round + ". von " + ROUNDS + " Personen in dieser Lage" +
-    " &nbsp;·&nbsp; Stimmzettel " + (cur+1) + " von " + VOTERS +
-    "</div><div class='who'>" + name + "</div><div class='bio'>" + bio + "</div>";
+  t.innerHTML = "<div class='muted small'>Rolle " + nr + " von " + ROLES.length + " &nbsp;·&nbsp; " +
+    round + ". von " + ROUNDS + " Personen in dieser Lage &nbsp;·&nbsp; Stimmzettel " + (cur+1) +
+    " von " + VOTERS + "</div><div class='who'>" + name + "</div><div class='bio'>" + bio + "</div>";
   r.appendChild(t);
 }
-
 function renderChoose(){
   const box = $("#choose"); box.innerHTML = "";
   LISTS.forEach(l => {
     const b = el("button"); b.style.setProperty("--c", l.hex);
-    b.innerHTML = "<div class='cn'>Liste " + l.name + "</div><div class='cs'>" + l.slogan +
+    b.innerHTML = "<div class='cn'>" + l.name + "</div><div class='cs'>" + l.full +
       "</div><div class='cc'>" + l.cands.length + " Kandidierende</div>";
     b.onclick = () => pickList(l.id);
     box.appendChild(b);
   });
 }
-
 function pickList(id){
   curList = id;
   const l = listBy(id);
@@ -505,21 +485,18 @@ function pickList(id){
   $("#step-fill").classList.remove("hidden");
   renderBallot();
 }
-
 function renderBallot(){
   const l = listBy(curList);
   const box = $("#step-fill"); box.innerHTML = "";
   const b = el("div","ballot"); b.style.setProperty("--c", l.hex);
-
   const head = el("div","ballot-head");
-  head.innerHTML = "<h2>Stimmzettel Liste " + l.name + "</h2><div class='muted small'>Kanton Tannmatt &nbsp;|&nbsp; " +
-    SEATS + " Stimmen</div>";
+  head.innerHTML = "<h2>Stimmzettel " + l.name + "</h2><div class='muted small'>Kanton Tannmatt " +
+    "&nbsp;|&nbsp; " + SEATS + " Stimmen</div>";
   b.appendChild(head);
 
   curSlots.forEach((code,i) => {
     const row = el("div","line");
     const n = el("div","n"); n.textContent = (i+1); row.appendChild(n);
-
     const sel = el("select");
     sel.setAttribute("aria-label","Zeile " + (i+1));
     const blank = el("option");
@@ -527,7 +504,7 @@ function renderBallot(){
     sel.appendChild(blank);
     LISTS.forEach(ll => {
       const og = document.createElement("optgroup");
-      og.label = "Liste " + ll.name + (ll.id === curList ? " (eigene Liste)" : "");
+      og.label = ll.name + (ll.id === curList ? " (eigene Liste)" : "");
       ll.cands.forEach((c,k) => {
         const o = el("option");
         o.value = ll.id+(k+1);
@@ -544,7 +521,6 @@ function renderBallot(){
       sel.style.setProperty("--fc", listBy(candBy(code).list).hex);
     }
     row.appendChild(sel);
-
     if (code && candBy(code).list !== curList){
       const bd = el("div","badge");
       bd.style.setProperty("--fc", listBy(candBy(code).list).hex);
@@ -565,7 +541,7 @@ function renderBallot(){
       "mehr als zweimal auf dem Zettel. Erlaubt sind höchstens zwei Stimmen pro Person.";
     foot.appendChild(w);
   }
-  const blanks = curSlots.filter(c => !c).length;
+  const blanks  = curSlots.filter(c => !c).length;
   const foreign = curSlots.filter(c => c && candBy(c).list !== curList).length;
   const cum = Object.keys(counts).filter(c => counts[c] === 2).length;
   const hint = el("div","hint");
@@ -575,34 +551,23 @@ function renderBallot(){
   foot.appendChild(hint);
 
   const row = el("div","btn-row");
-  const submit = el("button","btn");
-  submit.textContent = "Zettel einwerfen";
-  submit.disabled = tooMany.length > 0;
-  submit.onclick = castBallot; row.appendChild(submit);
-
+  const submit = el("button","btn"); submit.textContent = "Zettel einwerfen";
+  submit.disabled = tooMany.length > 0; submit.onclick = castBallot; row.appendChild(submit);
   const back = el("button","btn-ghost"); back.textContent = "Andere Liste nehmen";
   back.onclick = () => { $("#step-fill").classList.add("hidden"); $("#step-list").classList.remove("hidden"); };
   row.appendChild(back);
-
   const rnd = el("button","btn-ghost"); rnd.textContent = "Zufällig ausfüllen";
-  rnd.onclick = () => { curSlots = randomSlots(curList); renderBallot(); };
-  row.appendChild(rnd);
-
+  rnd.onclick = () => { curSlots = randomSlots(curList); renderBallot(); }; row.appendChild(rnd);
   const skip = el("button","btn-ghost"); skip.textContent = "Restliche zufällig abstimmen lassen";
-  skip.onclick = () => { castBallot(); fillRest(); };
-  row.appendChild(skip);
-
+  skip.onclick = () => { castBallot(); fillRest(); }; row.appendChild(skip);
   foot.appendChild(row); b.appendChild(foot); box.appendChild(b);
 }
-
 function castBallot(){ ballots.push({list:curList, slots:curSlots.slice()}); cur++; nextVoter(); }
 
 function weightedList(){
-  const r = Math.random();
-  if (r < 0.33) return "R";
-  if (r < 0.63) return "B";
-  if (r < 0.85) return "G";
-  return "Y";
+  let r = Math.random();
+  for (const [id,w] of WEIGHTS){ r -= w; if (r <= 0) return id; }
+  return WEIGHTS[WEIGHTS.length-1][0];
 }
 function randomSlots(listId){
   const slots = [], used = {};
@@ -619,22 +584,15 @@ function randomSlots(listId){
   return slots;
 }
 function fillRest(){
-  while (cur < VOTERS){
-    const li = weightedList();
-    ballots.push({list:li, slots:randomSlots(li)});
-    cur++;
-  }
+  while (cur < VOTERS){ const li = weightedList(); ballots.push({list:li, slots:randomSlots(li)}); cur++; }
   nextVoter();
 }
 function demoAll(){
   ballots = []; cur = 0; lotUsed = false;
-  $("#stamp").textContent = "Auszählung";
-  fillRest();
+  $("#stamp").textContent = "Auszählung"; fillRest();
 }
 
-/* ==========================================================
-   AUSZÄHLUNG
-   ========================================================== */
+/* ================== RECHNEN ================== */
 function tally(){
   const candVotes = {}; CANDS.forEach(c => candVotes[c.code] = 0);
   const zusatz = {}; LISTS.forEach(l => zusatz[l.id] = 0);
@@ -644,13 +602,11 @@ function tally(){
     else zusatz[bl.list]++;
   }));
   const party = {};
-  LISTS.forEach(l => {
-    party[l.id] = l.cands.reduce((s,_,i) => s + candVotes[l.id+(i+1)], 0) + zusatz[l.id];
-  });
+  LISTS.forEach(l => party[l.id] =
+    l.cands.reduce((s,_,i) => s + candVotes[l.id+(i+1)], 0) + zusatz[l.id]);
   const total = Object.values(party).reduce((a,b)=>a+b,0);
   return { candVotes, zusatz, party, total, panasch };
 }
-
 function allocate(party, seats){
   const log = [];
   const vz = Math.floor(Object.values(party).reduce((a,b)=>a+b,0) / (seats+1)) + 1;
@@ -667,38 +623,40 @@ function allocate(party, seats){
       else if (Math.abs(q-best) < 1e-9) winners.push(l.id);
     });
     if (!winners.length) break;
-    const lot = winners.length > 1;
-    if (lot) lotUsed = true;
+    const lot = winners.length > 1; if (lot) lotUsed = true;
     const w = winners[Math.floor(Math.random()*winners.length)];
-    log.push({ round: log.length+1, quot: best, winner: w, lot, snapshot: Object.assign({}, got) });
+    log.push({ round: log.length+1, winner: w, lot, snapshot: Object.assign({}, got) });
     got[w]++; assigned++;
   }
   return { vz, got, log, capped: LISTS.filter(l => got[l.id] >= capacity[l.id]).map(l=>l.id) };
 }
-
-function electedOf(listId, n, candVotes){
+function rankedOf(listId, candVotes){
   const l = listBy(listId);
-  const arr = l.cands.map((c,i) => ({ code:l.id+(i+1), name:c[0], job:c[1], v:candVotes[l.id+(i+1)] }));
+  const arr = l.cands.map((c,i) => ({ code:l.id+(i+1), name:c[0], job:c[1], list:l.id,
+                                      v:candVotes[l.id+(i+1)] }));
   for (let i = arr.length-1; i > 0; i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]] = [arr[j],arr[i]];
   }
   arr.sort((a,b) => b.v - a.v);
-  if (n > 0 && n < arr.length && arr[n-1].v === arr[n].v) lotUsed = true;
-  return { chosen: arr.slice(0,n), all: arr };
+  return arr;
 }
 
 let RESULT = null;
 function runCount(){
   const t = tally();
   const a = allocate(t.party, SEATS);
-  RESULT = { t, a };
+  const ranked = {}; LISTS.forEach(l => ranked[l.id] = rankedOf(l.id, t.candVotes));
+  const elected = [];
+  LISTS.forEach(l => {
+    const arr = ranked[l.id], n = a.got[l.id];
+    if (n > 0 && n < arr.length && arr[n-1].v === arr[n].v) lotUsed = true;
+    arr.slice(0,n).forEach(c => elected.push(c));
+  });
+  RESULT = { t, a, ranked, elected };
   renderCount(); show("count");
 }
 
-const pct = (x,of) => (of ? (x/of*100) : 0).toFixed(1).replace(".",",") + " %";
-const sw = hex => '<span class="swatch" style="--c:'+hex+'"></span>';
-
+/* Halbkreis */
 function hemicycle(got){
   const seats = [];
   LISTS.forEach(l => { for (let i=0;i<got[l.id];i++) seats.push(l); });
@@ -716,79 +674,142 @@ function hemicycle(got){
   });
   s += '<rect x="'+(cx-26)+'" y="'+(cy+4)+'" width="52" height="9" rx="1.5" fill="#1F2B33"/>';
   s += '<line x1="'+(cx-R-rad-16)+'" y1="'+(cy+16)+'" x2="'+(cx+R+rad+16)+'" y2="'+(cy+16)+
-       '" stroke="#1F2B33" stroke-width="2"/>';
-  s += '</svg>';
+       '" stroke="#1F2B33" stroke-width="2"/></svg>';
   return s;
 }
 
+/* ================== AUSZÄHLUNG ================== */
 function renderCount(){
-  const { t, a } = RESULT;
+  const { t, a, ranked, elected } = RESULT;
   const box = $("#screen-count");
   box.innerHTML = "<h2>Auszählung im Wahlbüro Tannmatt</h2><p class='muted max70'>Alle " + VOTERS +
-    " Stimmzettel sind eingeworfen. " + t.total + " Parteistimmen sind zu verteilen, " +
-    t.panasch + " davon wurden panaschiert.</p>";
+    " Stimmzettel sind eingeworfen. " + t.total + " Stimmen sind zu verteilen, " + t.panasch +
+    " davon wurden panaschiert.</p>";
 
+  /* --- 1 Wer hat wie viele Stimmen? --- */
   let s = el("div","step");
-  s.innerHTML = "<div class='no'>Schritt 1</div><h2>Kandidatenstimmen</h2>" +
-    "<p class='muted small max70'>Jede beschriftete Zeile auf jedem Zettel ist eine Stimme – auch die " +
-    "von anderen Listen übernommenen.</p>";
+  s.innerHTML = "<div class='no'>Schritt 1</div><h2>Wer hat wie viele Stimmen erhalten?</h2>" +
+    "<p class='muted small max70'>Jede beschriftete Zeile auf jedem Zettel ist eine Stimme für die " +
+    "genannte Person – auch dann, wenn sie von einer anderen Liste stammt. Pro Partei nach Stimmen " +
+    "geordnet.</p>";
   const g = el("div");
-  g.style.cssText = "display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px";
+  g.style.cssText = "display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px";
   LISTS.forEach(l => {
     const tab = el("table");
-    let r = "<caption>" + sw(l.hex) + "Liste " + l.name + "</caption>" +
+    let r = "<caption>" + sw(l.hex) + l.name + "</caption>" +
       "<tr><th>Kandidat:in</th><th class='num'>Stimmen</th></tr>";
-    l.cands.forEach((c,i) => r += "<tr><td>" + c[0] + "</td><td class='num'>" + t.candVotes[l.id+(i+1)] + "</td></tr>");
-    r += "<tr><td class='muted'>Zusatzstimmen</td><td class='num'>" + t.zusatz[l.id] + "</td></tr>";
-    r += "<tr class='total'><td>Parteistimmen</td><td class='num'>" + t.party[l.id] + "</td></tr>";
+    ranked[l.id].forEach(c => {
+      const win = elected.some(e => e.code === c.code);
+      r += "<tr" + (win ? " class='win'" : "") + "><td>" + c.name + (win ? " ✓" : "") +
+        "</td><td class='num'>" + c.v + "</td></tr>";
+    });
     tab.innerHTML = r; g.appendChild(tab);
   });
   s.appendChild(g);
-  const chk = el("div","notice");
-  chk.innerHTML = "<b>Kontrolle:</b> " + LISTS.map(l=>t.party[l.id]).join(" + ") + " = " + t.total +
-    ". Das muss " + VOTERS + " × " + SEATS + " = " + (VOTERS*SEATS) + " ergeben." +
-    (t.total === VOTERS*SEATS ? " Stimmt." : " Stimmt nicht.");
-  s.appendChild(chk); box.appendChild(s);
-
-  s = el("div","step");
-  s.innerHTML = "<div class='no'>Schritt 2</div><h2>Verteilungszahl</h2>" +
-    "<p class='muted small max70'>So viele Stimmen kostet ein Sitz in Tannmatt.</p>" +
-    "<div class='formula'>" + t.total + " ÷ (" + SEATS + " + 1) = " +
-    (t.total/(SEATS+1)).toFixed(2).replace(".",",") +
-    " → aufgerundet auf die nächsthöhere ganze Zahl → <b>" + a.vz + "</b></div>";
+  s.appendChild(Object.assign(el("p","small muted"),
+    { textContent: "Ein Häkchen bedeutet: gewählt. Warum genau diese, steht weiter unten." }));
   box.appendChild(s);
 
+  /* --- 2 Wer kommt in den Nationalrat? --- */
   s = el("div","step");
-  s.innerHTML = "<div class='no'>Schritt 3</div><h2>Sitze direkt zuteilen</h2>" +
-    "<p class='muted small max70'>Parteistimmen geteilt durch die Verteilungszahl. Nachkommastellen fallen weg.</p>";
+  s.innerHTML = "<div class='no'>Schritt 2</div><h2>Wer kommt in den Nationalrat?</h2>" + hemicycle(a.got);
+  const leg = el("div","legend");
+  leg.innerHTML = LISTS.map(l => "<span>" + sw(l.hex) + l.name + " " + a.got[l.id] + "</span>").join("");
+  s.appendChild(leg);
+
+  const wrap = el("div","elected");
+  elected.forEach(c => {
+    const l = listBy(c.list);
+    const d = el("div"); d.style.setProperty("--c", l.hex);
+    d.innerHTML = "<span><span class='li'>" + l.name + "</span><span class='nm'>" + c.name +
+      "</span><span class='job'> &nbsp;" + c.job + "</span></span>" +
+      "<span class='votes'>" + c.v + " Stimmen</span>";
+    wrap.appendChild(d);
+  });
+  s.appendChild(wrap);
+
+  /* Vergleich: die sieben stimmenstärksten Personen überhaupt */
+  const alle = CANDS.map(c => ({ code:c.code, name:c.name, list:c.list, v:t.candVotes[c.code] }))
+                    .sort((x,y) => y.v - x.v);
+  const top7 = alle.slice(0,SEATS);
+  const anders = top7.filter(c => !elected.some(e => e.code === c.code));
+  const nv = el("div","notice");
+  if (anders.length){
+    nv.innerHTML = "<b>Achtung, hier wird es interessant.</b> Gewählt sind nicht einfach die sieben " +
+      "Personen mit den meisten Stimmen. " + anders.length +
+      (anders.length === 1 ? " Person hätte" : " Personen hätten") + " es sonst geschafft: " +
+      anders.map(c => c.name + " (" + listBy(c.list).name + ", " + c.v + ")").join(", ") +
+      ". Zuerst werden nämlich die Sitze auf die Parteien verteilt, erst danach zählen die " +
+      "Personen. Wie das geht, steht in den Schritten 3 bis 6.";
+  } else {
+    nv.innerHTML = "<b>Zufall dieser Runde:</b> Diesmal sind es genau die sieben Personen mit den " +
+      "meisten Stimmen. Das muss nicht so sein – zuerst werden die Sitze auf die Parteien verteilt, " +
+      "erst danach zählen die Personen. Wie das geht, steht in den Schritten 3 bis 6.";
+  }
+  s.appendChild(nv);
+  box.appendChild(s);
+
+  /* --- 3 Parteistimmen --- */
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 3</div><h2>Zuerst zählen die Parteien</h2>" +
+    "<p class='muted small max70'>Alle Stimmen für die Kandidierenden einer Partei werden addiert. " +
+    "Dazu kommen die Zusatzstimmen: leer gelassene Zeilen gehen an die Partei, deren Name oben auf " +
+    "dem Zettel steht. So hat jeder Zettel genau sieben Parteistimmen.</p>";
   const t3 = el("table");
-  let r3 = "<tr><th>Liste</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + a.vz +
-    "</th><th class='num'>Sitze direkt</th></tr>";
+  let r3 = "<tr><th>Partei</th><th class='num'>Stimmen für Personen</th>" +
+    "<th class='num'>Zusatzstimmen</th><th class='num'>Parteistimmen</th></tr>";
+  LISTS.forEach(l => {
+    const pers = t.party[l.id] - t.zusatz[l.id];
+    r3 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + pers + "</td><td class='num'>" +
+      t.zusatz[l.id] + "</td><td class='num'>" + t.party[l.id] + "</td></tr>";
+  });
+  r3 += "<tr class='total'><td>Total</td><td class='num'>" + (t.total - Object.values(t.zusatz).reduce((a,b)=>a+b,0)) +
+    "</td><td class='num'>" + Object.values(t.zusatz).reduce((a,b)=>a+b,0) + "</td><td class='num'>" +
+    t.total + "</td></tr>";
+  t3.innerHTML = r3; s.appendChild(t3);
+  const chk = el("p","small muted");
+  chk.textContent = "Kontrolle: " + VOTERS + " Zettel × " + SEATS + " Stimmen = " + (VOTERS*SEATS) +
+    ". Ausgezählt: " + t.total + (t.total === VOTERS*SEATS ? ". Stimmt." : ". Stimmt nicht.");
+  s.appendChild(chk); box.appendChild(s);
+
+  /* --- 4 Verteilungszahl --- */
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 4</div><h2>Was ein Sitz kostet</h2>" +
+    "<div class='formula'>" + t.total + " ÷ (" + SEATS + " + 1) = " +
+    (t.total/(SEATS+1)).toFixed(2).replace(".",",") +
+    " → aufgerundet → <b>" + a.vz + "</b> Stimmen pro Sitz</div>" +
+    "<p class='muted small max70'>Diese Zahl heisst Verteilungszahl.</p>";
+  box.appendChild(s);
+
+  /* --- 5 direkte Sitze --- */
+  s = el("div","step");
+  s.innerHTML = "<div class='no'>Schritt 5</div><h2>Sitze verteilen</h2>" +
+    "<p class='muted small max70'>Parteistimmen geteilt durch die Verteilungszahl. Nachkommastellen fallen weg.</p>";
+  const t5 = el("table");
+  let r5 = "<tr><th>Partei</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + a.vz +
+    "</th><th class='num'>Sitze</th></tr>";
   const direct = {};
   LISTS.forEach(l => {
     const raw = t.party[l.id]/a.vz;
     direct[l.id] = Math.min(Math.floor(raw), l.cands.length);
-    r3 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + t.party[l.id] +
-      "</td><td class='num'>" + raw.toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
+    r5 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + t.party[l.id] + "</td><td class='num'>" +
+      raw.toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
   });
   const dsum = Object.values(direct).reduce((x,y)=>x+y,0);
-  r3 += "<tr class='total'><td>Total</td><td class='num'>" + t.total + "</td><td></td><td class='num'>" +
+  r5 += "<tr class='total'><td>Total</td><td class='num'>" + t.total + "</td><td></td><td class='num'>" +
     dsum + " von " + SEATS + "</td></tr>";
-  t3.innerHTML = r3; s.appendChild(t3);
-  const rest = SEATS - dsum;
-  const n3 = el("p","small muted");
-  n3.textContent = rest > 0
-    ? rest + (rest===1 ? " Sitz bleibt" : " Sitze bleiben") + " übrig."
-    : "Alle Sitze sind bereits vergeben – ein seltener Fall.";
-  s.appendChild(n3); box.appendChild(s);
+  t5.innerHTML = r5; s.appendChild(t5);
+  box.appendChild(s);
 
+  /* --- 6 Restsitze --- */
   if (a.log.length){
     s = el("div","step");
-    s.innerHTML = "<div class='no'>Schritt 4</div><h2>Restsitze verteilen</h2>" +
+    s.innerHTML = "<div class='no'>Schritt 6</div><h2>Die übrigen " +
+      (SEATS-dsum === 1 ? "Sitz" : SEATS-dsum + " Sitze") + "</h2>" +
       "<p class='muted small max70'>Parteistimmen geteilt durch die Zahl der bereits erhaltenen Sitze " +
       "plus eins. Das höchste Ergebnis bekommt den nächsten Sitz, dann wird neu gerechnet.</p>";
-    const t4 = el("table");
-    let head = "<tr><th>Liste</th>";
+    const t6 = el("table");
+    let head = "<tr><th>Partei</th>";
     a.log.forEach(L => head += "<th class='num'>Restsitz " + L.round + "</th>");
     head += "</tr>";
     let body = "";
@@ -806,20 +827,28 @@ function renderCount(){
     let foot = "<tr class='total'><td>Sitz geht an</td>";
     a.log.forEach(L => foot += "<td class='num'>" + listBy(L.winner).name + (L.lot ? " (Los)" : "") + "</td>");
     foot += "</tr>";
-    t4.innerHTML = head + body + foot; s.appendChild(t4);
+    t6.innerHTML = head + body + foot; s.appendChild(t6);
     if (a.capped.length){
-      const c = el("p","small muted");
-      c.textContent = "Ein Strich bedeutet: Diese Liste hat keine weiteren Kandidierenden und kann keinen zusätzlichen Sitz annehmen.";
-      s.appendChild(c);
+      s.appendChild(Object.assign(el("p","small muted"), { textContent:
+        "Ein Strich bedeutet: Diese Partei hat keine weiteren Kandidierenden und kann keinen zusätzlichen Sitz annehmen." }));
     }
     box.appendChild(s);
   }
 
+  /* --- 7 zurück zu den Personen --- */
   s = el("div","step");
-  s.innerHTML = "<div class='no'>Schritt 5</div><h2>Die Tannmatter Vertretung</h2>" + hemicycle(a.got);
-  const leg = el("div","legend");
-  leg.innerHTML = LISTS.map(l => "<span>" + sw(l.hex) + l.name + " " + a.got[l.id] + "</span>").join("");
-  s.appendChild(leg);
+  s.innerHTML = "<div class='no'>Schritt 7</div><h2>Und erst jetzt die Personen</h2>" +
+    "<p class='max70'>Jetzt steht fest, wie viele Sitze jede Partei hat. Innerhalb der Partei erhalten " +
+    "die Personen mit den meisten Stimmen aus Schritt 1 diese Sitze. Die Reihenfolge auf dem gedruckten " +
+    "Stimmzettel spielt dabei keine Rolle.</p>";
+  const t7 = el("table");
+  let r7 = "<tr><th>Partei</th><th class='num'>Sitze</th><th>Gewählt</th></tr>";
+  LISTS.forEach(l => {
+    const namen = elected.filter(e => e.list === l.id).map(e => e.name).join(", ");
+    r7 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + a.got[l.id] + "</td><td>" +
+      (namen || "<span class='muted'>keine Sitze</span>") + "</td></tr>";
+  });
+  t7.innerHTML = r7; s.appendChild(t7);
   box.appendChild(s);
 
   const row = el("div","btn-row");
@@ -828,113 +857,62 @@ function renderCount(){
   row.appendChild(b); box.appendChild(row);
 }
 
-/* ==========================================================
-   AUSWERTUNG
-   ========================================================== */
+/* ================== AUSWERTUNG (kurz) ================== */
 function renderResult(){
   const { t, a } = RESULT;
   const box = $("#screen-result");
-  box.innerHTML = "<h2>Was Tannmatt entschieden hat</h2>" + hemicycle(a.got);
-
-  const s1 = el("div","step");
-  s1.innerHTML = "<div class='no'>Wer einzieht</div><h2>Die sieben Gewählten</h2>" +
-    "<p class='muted small max70'>Innerhalb einer Liste entscheiden allein die Kandidatenstimmen. " +
-    "Die Reihenfolge auf dem gedruckten Zettel spielt keine Rolle.</p>";
-  const wrap = el("div","elected");
-  LISTS.forEach(l => {
-    if (!a.got[l.id]) return;
-    electedOf(l.id, a.got[l.id], t.candVotes).chosen.forEach(c => {
-      const d = el("div"); d.style.setProperty("--c", l.hex);
-      d.innerHTML = "<span><span class='li'>" + l.name + "</span><span class='nm'>" + c.name +
-        "</span><span class='job'> &nbsp;" + c.job + "</span></span>" +
-        "<span class='votes'>" + c.v + " Stimmen</span>";
-      wrap.appendChild(d);
-    });
-  });
-  s1.appendChild(wrap);
-  const out = LISTS.filter(l => !a.got[l.id]);
-  if (out.length){
-    const o = el("div","notice");
-    o.innerHTML = "<b>Ohne Sitz:</b> " + out.map(l =>
-      "Liste " + l.name + " – " + t.party[l.id] + " Parteistimmen, nötig wären rund " + a.vz +
-      " gewesen").join(". ") + ".";
-    s1.appendChild(o);
-  }
-  box.appendChild(s1);
+  box.innerHTML = "<h2>Auswertung</h2><p class='muted max70'>Ein Vergleich, ein paar Fragen, fertig.</p>";
 
   const s2 = el("div","step");
   s2.innerHTML = "<div class='no'>Der Vergleich</div><h2>Stimmenanteil und Sitzanteil</h2>";
   const leg = el("div","legend");
-  leg.innerHTML = "<span><i></i>Stimmenanteil</span><span><i class='h'></i>Sitzanteil</span>";
+  leg.innerHTML = "<span><i></i>Anteil an allen Stimmen</span><span><i class='h'></i>Anteil an den 7 Sitzen</span>";
   s2.appendChild(leg);
   LISTS.forEach(l => {
     const v = t.party[l.id]/t.total*100, sS = a.got[l.id]/SEATS*100;
     const r = el("div","barrow"); r.style.setProperty("--c", l.hex);
     r.innerHTML = "<div class='barlab'>" + l.name + "</div><div class='barpair'>" +
-      "<div class='bar' style='width:" + Math.max(v,5) + "%'>" + pct(t.party[l.id], t.total) + "</div>" +
-      "<div class='bar hollow' style='width:" + Math.max(sS,5) + "%'>" + a.got[l.id] +
+      "<div class='bar' style='width:" + Math.max(v,6) + "%'>" + pct(t.party[l.id], t.total) + "</div>" +
+      "<div class='bar hollow' style='width:" + Math.max(sS,6) + "%'>" + a.got[l.id] +
       (a.got[l.id]===1?" Sitz":" Sitze") + "</div></div>";
     s2.appendChild(r);
   });
   const rank = LISTS.slice().sort((x,y) =>
     ((a.got[y.id]/SEATS)-(t.party[y.id]/t.total)) - ((a.got[x.id]/SEATS)-(t.party[x.id]/t.total)));
-  const note = el("p","small muted max70");
-  note.textContent = "Am stärksten übervertreten ist " + rank[0].name + ", am stärksten untervertreten " +
-    rank[rank.length-1].name + ". Je weniger Sitze ein Kanton hat, desto grösser wird dieser Unterschied.";
-  s2.appendChild(note); box.appendChild(s2);
-
-  const s3 = el("div","step");
-  s3.innerHTML = "<div class='no'>Gedankenexperiment</div><h2>Wäre Tannmatt ein anderer Kanton</h2>" +
-    "<p class='muted small max70'>Dieselben Stimmen, ein anderer Wahlkreis. Tannmatt hat sieben Sitze – " +
-    "aber in Uri wäre es einer und in Zürich über dreissig. Die Zeile mit sieben ist das echte Ergebnis, " +
-    "die anderen zeigen, was die Kantonsgrösse ausmacht.</p>";
-  const t5 = el("table");
-  let head = "<tr><th>Sitze</th>";
-  LISTS.forEach(l => head += "<th class='num'>" + sw(l.hex) + l.name + "</th>");
-  head += "<th class='num'>Verteilungszahl</th></tr>";
-  let body = "";
-  [1,3,5,7,9,15].forEach(n => {
-    const alt = allocate(t.party, n);
-    body += "<tr" + (n===SEATS ? " class='total'" : "") + "><td>" + n +
-      (n===SEATS ? " (Tannmatt)" : "") + "</td>";
-    LISTS.forEach(l => body += "<td class='num'>" + alt.got[l.id] + "</td>");
-    body += "<td class='num muted'>" + alt.vz + "</td></tr>";
-  });
-  t5.innerHTML = head + body; s3.appendChild(t5);
-  const cap = el("p","small muted max70");
-  cap.textContent = "Bei einem einzigen Sitz ist von Proporz nichts mehr übrig – dann gewinnt schlicht " +
-    "die stärkste Liste alles. Und GELB hat nur zwei Kandidierende, kann also nie mehr als zwei Sitze " +
-    "erhalten, egal wie gross der Kanton wäre.";
-  s3.appendChild(cap); box.appendChild(s3);
+  const out = LISTS.filter(l => !a.got[l.id]);
+  let txt = "Am stärksten übervertreten ist " + rank[0].name + ", am stärksten untervertreten " +
+    rank[rank.length-1].name + ".";
+  if (out.length) txt += " Ohne Sitz " + (out.length===1 ? "bleibt " : "bleiben ") +
+    out.map(l => l.name + " mit " + t.party[l.id] + " Stimmen").join(" und ") +
+    " – nötig wären rund " + a.vz + " gewesen.";
+  s2.appendChild(Object.assign(el("p","small muted max70"), { textContent: txt }));
+  box.appendChild(s2);
 
   const s4 = el("div","step");
-  s4.innerHTML = "<div class='no'>Im Klassengespräch</div><h2>Fragen an Tannmatt</h2>";
+  s4.innerHTML = "<div class='no'>Im Klassengespräch</div><h2>Fünf Fragen</h2>";
   const ol = el("ol","qlist");
   [
-    "Jede Rolle wurde dreimal gespielt. Vergleicht die drei Zettel pro Rolle: Haben die drei Anna-Spielenden gleich gewählt? Was heisst das für Umfragen, die von Lebenslagen auf Wahlverhalten schliessen?",
-    "Welche Liste hat mehr Sitzanteil als Stimmenanteil? Zeigt im Rechenweg genau die Stelle, an der dieser Vorteil entsteht.",
-    "Wie viele zusätzliche Stimmen hätte die schwächste Liste für einen Sitz gebraucht? Rechnet es aus.",
-    "Bei einer Majorzwahl hätte die stärkste Liste alle sieben Sitze gewinnen können. Was spräche dafür, was dagegen?",
-    "In Tannmatt leben 341 800 Menschen, aber nur 236 400 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?",
-    "Wie viele Stimmen haben durch Panaschieren die Liste gewechselt? Wählen die Leute in Tannmatt eher eine Partei oder eher eine Person?",
-    "Anna wollte wegen der Wohnungsnot wählen. Sitzt jetzt jemand im Rat, der ihr Anliegen vertritt? Woran erkennt ihr das?"
+    "Jede Rolle wurde dreimal gespielt. Haben die drei Anna-Spielenden gleich gewählt? Was heisst das für Umfragen, die von der Lebenslage aufs Wahlverhalten schliessen?",
+    "In Schritt 2 stand: Gewählt ist nicht einfach, wer am meisten Stimmen hat. Erklärt in eigenen Worten, warum das so ist.",
+    "Welche Partei hat mehr Sitzanteil als Stimmenanteil? Zeigt im Rechenweg die Stelle, an der dieser Vorteil entsteht.",
+    "Wie viele zusätzliche Stimmen hätte die schwächste Partei für einen Sitz gebraucht? Rechnet es aus.",
+    "In Tannmatt leben 341 800 Menschen, aber nur 236 400 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?"
   ].forEach(q => { const li = el("li"); li.textContent = q; ol.appendChild(li); });
   s4.appendChild(ol); box.appendChild(s4);
 
   if (lotUsed){
     const l = el("div","notice");
     l.innerHTML = "<b>Losentscheid:</b> An mindestens einer Stelle waren zwei Ergebnisse exakt gleich. " +
-      "Das Programm hat gelost, wie es das Gesetz bei der Nationalratswahl vorsieht. Ein guter Moment " +
-      "für die Frage, ob Zufall in einer Wahl akzeptabel ist.";
+      "Das Programm hat gelost, wie es das Gesetz vorsieht.";
     box.appendChild(l);
   }
 
   const meth = el("div","notice");
-  meth.innerHTML = "<b>Zur Genauigkeit:</b> Nachgebildet ist das Hagenbach-Bischoff-Verfahren der " +
-    "schweizerischen Nationalratswahl. Nicht abgebildet sind Listenverbindungen, Unterlistenverbindungen " +
-    "und ungültige Stimmzettel. Mehrere Kantone verwenden für ihr Kantonsparlament ein anderes Verfahren. " +
-    "Die Verteilungszahl wird hier immer auf die nächsthöhere ganze Zahl aufgerundet, auch wenn die " +
-    "Division exakt aufgeht.";
+  meth.innerHTML = "<b>Zur Genauigkeit:</b> Der Kanton Tannmatt und alle einundzwanzig Kandidierenden " +
+    "sind erfunden. Die fünf Parteien sind real, ihre Kurzprofile stark vereinfacht. Gerechnet wird " +
+    "nach dem Hagenbach-Bischoff-Verfahren der Nationalratswahl; nicht abgebildet sind " +
+    "Listenverbindungen, Unterlistenverbindungen und ungültige Stimmzettel. Weitere Parteien wie die " +
+    "GLP oder die EVP treten hier nicht an.";
   box.appendChild(meth);
 
   const row = el("div","btn-row noprint");
@@ -946,7 +924,6 @@ function renderResult(){
   box.appendChild(row);
 }
 
-/* ========================================================== */
 renderPosters();
 renderRoleGrid();
 $("#go-vote").onclick = startVoting;
