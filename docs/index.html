@@ -149,10 +149,15 @@ tr.win td{background:#F3F6F0;font-weight:700}
 .anliegen li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
   border-radius:1px;background:var(--ink);opacity:.5}
 .tipp{margin-top:13px;background:#F4F6F2;border:1px solid var(--rule);border-radius:2px;
-  padding:10px 13px;font-size:13.2px;line-height:1.45;color:var(--muted);max-width:64ch}
+  padding:12px 15px;font-size:13.2px;line-height:1.45;color:var(--muted);max-width:64ch}
 .tipp b{display:block;color:var(--ink);font-size:11.5px;letter-spacing:.04em;margin-bottom:3px}
 .role{align-items:flex-start}
 .role .mono{margin-top:2px}
+.roletext{flex:1;min-width:0}
+.rolecols{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start;margin-top:7px}
+.rolecols .bio{margin-top:0}
+.rolecols .tipp{margin-top:0;max-width:none}
+@media (max-width:900px){ .rolecols{grid-template-columns:1fr;gap:0} .rolecols .tipp{margin-top:13px} }
 .rolecard .anliegen li{font-size:13px;padding-left:14px}
 .rolecard .anliegen li::before{top:8px;width:6px;height:6px}
 
@@ -250,8 +255,8 @@ details.ref[open] summary::before{content:"–"}
       <p class="lede" style="margin-top:18px">Am 19. Oktober wählt der Kanton Tannmatt seine sieben
       Vertreterinnen und Vertreter in den Nationalrat. Anna Vieira ist neunzehn und zum ersten Mal dabei.</p>
       <div class="facts">
-        <div><span>Einwohnende</span><b>341 800</b></div>
-        <div><span>Davon stimmberechtigt</span><b>236 400</b></div>
+        <div><span>Einwohnende</span><b>341 800</b></div>
+        <div><span>Davon stimmberechtigt</span><b>236 406</b></div>
         <div><span>Hauptort</span><b>Tannmatt</b></div>
         <div><span>Sitze im Nationalrat</span><b>7</b></div>
       </div>
@@ -283,9 +288,11 @@ details.ref[open] summary::before{content:"–"}
   <div class="anna">
     <h3>Wer ist Anna?</h3>
     <p style="margin:0">Anna Vieira ist in Tannmatt aufgewachsen, hat letzten Sommer die Lehre im
-    Detailhandel abgeschlossen und wohnt noch bei ihren Eltern in einem Block beim Bahnhof. Ihre Miete
-    wäre bezahlbar, wenn sie eine Wohnung fände. Vor zwei Wochen lag das Wahlmaterial im Briefkasten:
-    fünf Listen, einundzwanzig Namen, sieben Sitze. Anna weiss nicht, wo sie anfangen soll.</p>
+    Detailhandel abgeschlossen und wohnt noch bei ihren Eltern in einem Block beim Bahnhof. Sie möchte
+    ausziehen. Was in Tannmatt frei wird, kostet allerdings mehr als die Hälfte ihres Lohns – bei der
+    letzten Zweizimmerwohnung, die sie besichtigt hat, standen dreissig weitere Leute im Treppenhaus.
+    Vor zwei Wochen lag das Wahlmaterial im Briefkasten: fünf Listen, einundzwanzig Namen, sieben
+    Sitze. Anna weiss nicht, wo sie anfangen soll.</p>
     <p class="small muted" style="margin:10px 0 0">Der Kanton Tannmatt und alle Kandidierenden sind
     erfunden. Die fünf Parteien und das Wahlverfahren sind echt.</p>
   </div>
@@ -296,34 +303,32 @@ details.ref[open] summary::before{content:"–"}
     <p class="max70">Tannmatt hat 341 800 Einwohnende und damit sieben der 200 Nationalratssitze.
     Sieben Sitze heissen: Eine Liste braucht rund einen Achtel aller Stimmen, also etwa 12,5 Prozent,
     um einen Sitz zu holen. Diese Hürde steht in keinem Gesetz. Sie ergibt sich allein aus der Rechnung.</p>
-    <p class="small muted max70">Jede stimmberechtigte Person hat sieben Stimmen. Im Spiel sind das
-    18 × 7 = 126 Parteistimmen.</p>
+    <p class="small muted max70">Jede stimmberechtigte Person hat sieben Stimmen.</p>
   </div>
 
   <div class="step">
     <div class="no">Auf dem Stimmzettel</div>
     <h2>Fünf Listen, einundzwanzig Namen</h2>
     <div class="posters" id="posters"></div>
-    <div class="notice"><b>Zu den Kurzprofilen:</b> Die Zeilen unter den Parteinamen sind stark
-    vereinfachte Zusammenfassungen für den Unterricht und ersetzen keine Parteiprogramme. Wer genauer
-    hinschauen will: die Websites der Parteien oder ein Wahlhilfe-Tool wie smartvote. Alle
-    einundzwanzig Kandidierenden sind frei erfunden; Übereinstimmungen mit lebenden Personen wären
-    zufällig.</div>
+    <div class="notice"><b>Bewusst ohne Parteiprogramme.</b> Hier stehen nur die Namen. Wofür SP,
+    Grüne, Mitte, FDP und SVP stehen, bringt ihr aus dem Unterricht mit – genau das braucht ihr
+    nachher an der Urne. Alle einundzwanzig Kandidierenden dagegen sind frei erfunden;
+    Übereinstimmungen mit lebenden Personen wären zufällig.</div>
   </div>
 
   <div class="step">
     <div class="no">An der Urne</div>
-    <h2>Sechs Rollen, achtzehn Stimmzettel</h2>
-    <p class="max70">Achtzehn Personen stimmen ab, aber es gibt nur sechs Rollen. Jede Rolle wird
-    dreimal gespielt – von drei verschiedenen Menschen in derselben Lage. Ob die drei gleich wählen,
-    ist die eigentliche Frage.</p>
-    <p class="small muted max70">In einer Klasse von 18: jede Rollenkarte dreimal vergeben. Nach der
-    Wahl vergleichen, was die drei Anna-Spielenden angekreuzt haben.</p>
+    <h2>Sechs Menschen aus Tannmatt</h2>
+    <p class="max70">Diese sechs stehen für den ganzen Kanton. Wie sie sich entscheiden, entscheidet
+    Tannmatt – jedes Beispiel steht für ein Sechstel der Stimmberechtigten.</p>
+    <p class="small muted max70">In einer Klasse von 18: sechs Gruppen zu dritt bilden, jede Gruppe
+    übernimmt ein Beispiel und einigt sich auf einen Stimmzettel. Das Aushandeln in der Gruppe ist
+    der halbe Lerneffekt.</p>
     <div class="rolegrid" id="rolegrid"></div>
-    <div class="notice"><b>Es gibt keine richtige Lösung.</b> Jede Rolle bringt drei Anliegen mit,
-    die selten alle auf dieselbe Liste passen. Genau dieses Abwägen ist die Aufgabe – und der Grund,
-    warum drei Personen mit derselben Rolle unterschiedlich wählen können. Im Wahllokal steht zu jeder
-    Rolle zusätzlich ein Hinweis, wonach sich unter den einundzwanzig Kandidierenden suchen lässt.</div>
+    <div class="notice"><b>Es gibt keine richtige Lösung.</b> Jedes Beispiel bringt drei Anliegen mit,
+    die selten alle auf dieselbe Liste passen. Genau dieses Abwägen ist die Aufgabe. Im Wahllokal
+    steht zu jedem Beispiel zusätzlich ein Hinweis, wonach sich unter den einundzwanzig
+    Kandidierenden suchen lässt.</div>
     <div class="btn-row">
       <button class="btn" id="go-vote">Wahllokal öffnen</button>
       <button class="btn-ghost" id="go-demo">Alle 18 zufällig wählen lassen</button>
@@ -359,7 +364,6 @@ details.ref[open] summary::before{content:"–"}
 const LISTS = [
 /* Kandidierende: [Name, Alter, Beruf, Wohnort] */
   { id:"SP", name:"SP", full:"Sozialdemokratische Partei", hex:"#C60C30",
-    tag:"Sozialer Ausgleich, tiefere Krankenkassenprämien, bezahlbares Wohnen, Gleichstellung, Klimaschutz.",
     cands:[
       ["Amina Tesfay",       34, "Primarlehrerin",            "Tannmatt"],
       ["Reto Zurbriggen",    51, "Maurer und Gewerkschafter", "Hasental"],
@@ -368,14 +372,12 @@ const LISTS = [
       ["Marco De Luca",      62, "Rentner, früher Papierfabrik", "Riedern"]
     ]},
   { id:"GPS", name:"Grüne", full:"Grüne Partei der Schweiz", hex:"#6F8C10",
-    tag:"Klima- und Umweltschutz, Biodiversität, Verkehrswende, Schutz von Landschaft und Boden.",
     cands:[
       ["Nuray Öztürk",       33, "Biologin",                  "Val-Riond"],
       ["Noah Gerber",        24, "Student Umweltwissenschaften", "Tannmatt"],
       ["Fatima Ahmadi",      29, "Velomechanikerin",          "Riedern"]
     ]},
   { id:"MIT", name:"Mitte", full:"Die Mitte", hex:"#C1611A",
-    tag:"Ausgleich zwischen den Polen, Familien, Sicherung von AHV und Krankenversicherung, Service public in den Regionen.",
     cands:[
       ["Priya Rajeswaran",   36, "Zahnärztin",                "Tannmatt"],
       ["Andreas Hodel",      49, "Landwirt",                  "Hasental"],
@@ -383,7 +385,6 @@ const LISTS = [
       ["Ivan Bernasconi",    55, "Gemeindepräsident",         "Riedern"]
     ]},
   { id:"FDP", name:"FDP", full:"FDP.Die Liberalen", hex:"#0E52A0",
-    tag:"Unternehmertum und Gewerbe, weniger Regulierung, gesunde Bundesfinanzen, individuelle Verantwortung.",
     cands:[
       ["Beatrice von Gunten",57, "Treuhänderin",              "Tannmatt"],
       ["Sandra Iten",        30, "Software-Unternehmerin",    "Tannmatt"],
@@ -391,9 +392,8 @@ const LISTS = [
       ["Kilian Reber",       41, "Rechtsanwalt",              "Tannmatt"]
     ]},
   { id:"SVP", name:"SVP", full:"Schweizerische Volkspartei", hex:"#2F6B37",
-    tag:"Begrenzung der Zuwanderung, Unabhängigkeit gegenüber der EU, tiefe Steuern und Abgaben, starke Landwirtschaft.",
     cands:[
-      ["Driton Krasniqi",    41, "Bauunternehmer",            "Riedern"],
+      ["Marcel Bieri",       41, "Bauunternehmer",            "Riedern"],
       ["Ueli Stampfli",      58, "Landwirt und Metzger",      "Hasental"],
       ["Karin Hofstetter",   47, "Gärtnereibetrieb",          "Riedern"],
       ["Bruno Zwahlen",      52, "Transportunternehmer",      "Tannmatt"],
@@ -422,7 +422,7 @@ const ROLES = [
       "Tiefere Abgaben für kleine Betriebe",
       "Mehr Jugendliche in die Berufslehre"],
     tipp:"Mehrere Kandidierende führen selber einen Betrieb. Schau nach, auf welchen Listen sie " +
-         "stehen und was diese Listen zu Vorschriften und Abgaben schreiben." },
+         "stehen – und überlege, welche dieser Parteien deine Anliegen aufnimmt." },
 
   { name:"Rosmarie Gerber",
     bio:"73, Bäuerin im Hasental, hat den Hof an ihre Tochter übergeben. Der Bus ins Dorf fährt " +
@@ -464,9 +464,13 @@ const ROLES = [
     tipp:"Drei Kandidierende arbeiten im Gesundheits- oder Betreuungsbereich, verteilt auf zwei " +
          "Listen. Schau auch auf Alter und Herkunft der Namen." }
 ];
-const ROUNDS = 3;
-const VOTERS = ROLES.length * ROUNDS;   // 18
+const ELECTORATE = 236406;              // Stimmberechtigte in Tannmatt
+const VOTERS = ROLES.length;            // 6 Beispiele
+const WEIGHT = ELECTORATE / VOTERS;     // 39 401 Personen je Beispiel
 const SEATS  = 7;
+
+/* Tausendertrennung mit geschütztem Leerzeichen */
+const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
 
 /* Gewichtung nur für den Zufallsmodus – grob an schweizerischen
    Grössenverhältnissen orientiert, ohne Anspruch auf Genauigkeit. */
@@ -482,8 +486,7 @@ LISTS.forEach(l => l.cands.forEach((c,i) => CANDS.push({
   short:shortOf(c), job:jobOf(c), list:l.id })));
 const candBy = c => CANDS.find(x => x.code === c);
 const listBy = id => LISTS.find(l => l.id === id);
-const roleAt = i => ({ role:ROLES[i % ROLES.length], nr:(i % ROLES.length)+1,
-                       round:Math.floor(i / ROLES.length)+1 });
+const roleAt = i => ({ role:ROLES[i], nr:i+1 });
 
 let ballots = [], cur = 0, curList = null, curSlots = [], lotUsed = false;
 
@@ -507,7 +510,6 @@ function renderPosters(){
       " &middot; " + l.full + "</div>";
     p.appendChild(top);
     const body = el("div","body");
-    const tg = el("div","tag"); tg.textContent = l.tag; body.appendChild(tg);
     const ul = el("ul");
     l.cands.forEach((c,i) => {
       const li2 = el("li");
@@ -531,7 +533,7 @@ function renderRoleGrid(){
     a.innerHTML = "<div class='ah'>Was mir wichtig ist</div><ul>" +
       r.anliegen.map(x => "<li>" + x + "</li>").join("") + "</ul>";
     c.appendChild(a);
-    const x = el("div","x3"); x.textContent = "Rolle " + (i+1) + " — dreimal zu vergeben";
+    const x = el("div","x3"); x.textContent = "Beispiel " + (i+1) + " von " + ROLES.length;
     c.appendChild(x); box.appendChild(c);
   });
 }
@@ -553,23 +555,25 @@ function renderProgress(){
   const p = $("#progress"); p.innerHTML = "";
   for (let i=0;i<VOTERS;i++){
     const d = el("div","pip");
-    if (i % ROLES.length === 0 && i > 0) d.classList.add("gap");
     if (i < cur) d.dataset.done = "1";
     if (i === cur) d.dataset.now = "1";
     p.appendChild(d);
   }
 }
 function renderRole(){
-  const { role, nr, round } = roleAt(cur);
+  const { role, nr } = roleAt(cur);
   const r = $("#role"); r.innerHTML = "";
   const m = el("div","mono"); m.textContent = initials(role.name); r.appendChild(m);
-  const t = el("div");
-  t.innerHTML = "<div class='muted small'>Rolle " + nr + " von " + ROLES.length + " &nbsp;·&nbsp; " +
-    round + ". von " + ROUNDS + " Personen in dieser Lage &nbsp;·&nbsp; Stimmzettel " + (cur+1) +
-    " von " + VOTERS + "</div><div class='who'>" + role.name + "</div><div class='bio'>" + role.bio +
-    "</div><div class='anliegen'><div class='ah'>Was mir wichtig ist</div><ul>" +
-    role.anliegen.map(x => "<li>" + x + "</li>").join("") + "</ul></div>" +
-    "<div class='tipp'><b>Wonach du suchen kannst</b>" + role.tipp + "</div>";
+  const t = el("div","roletext");
+  t.innerHTML =
+    "<div class='muted small'>Beispiel " + nr + " von " + VOTERS + "</div>" +
+    "<div class='who'>" + role.name + "</div>" +
+    "<div class='rolecols'>" +
+      "<div class='rolemain'><div class='bio'>" + role.bio + "</div>" +
+      "<div class='anliegen'><div class='ah'>Was mir wichtig ist</div><ul>" +
+      role.anliegen.map(x => "<li>" + x + "</li>").join("") + "</ul></div></div>" +
+      "<div class='tipp'><b>Wonach du suchen kannst</b>" + role.tipp + "</div>" +
+    "</div>";
   r.appendChild(t);
 }
 function renderChoose(){
@@ -577,8 +581,7 @@ function renderChoose(){
   LISTS.forEach(l => {
     const b = el("button"); b.style.setProperty("--c", l.hex);
     b.innerHTML = "<div class='cn'>" + l.name + "</div><div class='cfull'>" + l.full +
-      "</div><div class='cs'>" + l.tag + "</div><div class='cc'>" + l.cands.length +
-      " Kandidierende</div>";
+      "</div><div class='cc'>" + l.cands.length + " Kandidierende</div>";
     b.onclick = () => pickList(l.id);
     box.appendChild(b);
   });
@@ -720,8 +723,8 @@ function tally(){
   const zusatz = {}; LISTS.forEach(l => zusatz[l.id] = 0);
   let panasch = 0;
   ballots.forEach(bl => bl.slots.forEach(code => {
-    if (code){ candVotes[code]++; if (candBy(code).list !== bl.list) panasch++; }
-    else zusatz[bl.list]++;
+    if (code){ candVotes[code] += WEIGHT; if (candBy(code).list !== bl.list) panasch += WEIGHT; }
+    else zusatz[bl.list] += WEIGHT;
   }));
   const party = {};
   LISTS.forEach(l => party[l.id] =
@@ -805,9 +808,9 @@ function hemicycle(got){
 function renderCount(){
   const { t, a, ranked, elected } = RESULT;
   const box = $("#screen-count");
-  box.innerHTML = "<h2>Auszählung im Wahlbüro Tannmatt</h2><p class='muted max70'>Alle " + VOTERS +
-    " Stimmzettel sind eingeworfen. " + t.total + " Stimmen sind zu verteilen, " + t.panasch +
-    " davon wurden panaschiert.</p>";
+  box.innerHTML = "<h2>Auszählung im Wahlbüro Tannmatt</h2><p class='muted max70'>Der Kanton hat " +
+    "gewählt. " + fmt(ELECTORATE) + " Stimmberechtigte, " + fmt(t.total) + " Stimmen. Davon wurden " +
+    fmt(t.panasch) + " panaschiert.</p>";
 
   /* --- 1 Wer hat wie viele Stimmen? --- */
   let s = el("div","step");
@@ -824,7 +827,7 @@ function renderCount(){
     ranked[l.id].forEach(c => {
       const win = elected.some(e => e.code === c.code);
       r += "<tr" + (win ? " class='win'" : "") + "><td>" + c.name + (win ? " ✓" : "") +
-        "<span class='sub'>" + c.short + "</span></td><td class='num'>" + c.v + "</td></tr>";
+        "<span class='sub'>" + c.short + "</span></td><td class='num'>" + fmt(c.v) + "</td></tr>";
     });
     tab.innerHTML = r; g.appendChild(tab);
   });
@@ -846,7 +849,7 @@ function renderCount(){
     const d = el("div"); d.style.setProperty("--c", l.hex);
     d.innerHTML = "<span><span class='li'>" + l.name + "</span><span class='nm'>" + c.name +
       "</span><span class='job'> &nbsp;" + c.job + "</span></span>" +
-      "<span class='votes'>" + c.v + " Stimmen</span>";
+      "<span class='votes'>" + fmt(c.v) + " Stimmen</span>";
     wrap.appendChild(d);
   });
   s.appendChild(wrap);
@@ -861,7 +864,7 @@ function renderCount(){
     nv.innerHTML = "<b>Achtung, hier wird es interessant.</b> Gewählt sind nicht einfach die sieben " +
       "Personen mit den meisten Stimmen. " + anders.length +
       (anders.length === 1 ? " Person hätte" : " Personen hätten") + " es sonst geschafft: " +
-      anders.map(c => c.name + " (" + c.short + ", " + listBy(c.list).name + ", " + c.v +
+      anders.map(c => c.name + " (" + c.short + ", " + listBy(c.list).name + ", " + fmt(c.v) +
                       " Stimmen)").join("; ") +
       ". Zuerst werden nämlich die Sitze auf die Parteien verteilt, erst danach zählen die " +
       "Personen. Wie das geht, steht in den Schritten 3 bis 6.";
@@ -884,24 +887,25 @@ function renderCount(){
     "<th class='num'>Zusatzstimmen</th><th class='num'>Parteistimmen</th></tr>";
   LISTS.forEach(l => {
     const pers = t.party[l.id] - t.zusatz[l.id];
-    r3 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + pers + "</td><td class='num'>" +
-      t.zusatz[l.id] + "</td><td class='num'>" + t.party[l.id] + "</td></tr>";
+    r3 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + fmt(pers) + "</td><td class='num'>" +
+      fmt(t.zusatz[l.id]) + "</td><td class='num'>" + fmt(t.party[l.id]) + "</td></tr>";
   });
-  r3 += "<tr class='total'><td>Total</td><td class='num'>" + (t.total - Object.values(t.zusatz).reduce((a,b)=>a+b,0)) +
-    "</td><td class='num'>" + Object.values(t.zusatz).reduce((a,b)=>a+b,0) + "</td><td class='num'>" +
-    t.total + "</td></tr>";
+  r3 += "<tr class='total'><td>Total</td><td class='num'>" + fmt(t.total - Object.values(t.zusatz).reduce((a,b)=>a+b,0)) +
+    "</td><td class='num'>" + fmt(Object.values(t.zusatz).reduce((a,b)=>a+b,0)) + "</td><td class='num'>" +
+    fmt(t.total) + "</td></tr>";
   t3.innerHTML = r3; s.appendChild(t3);
   const chk = el("p","small muted");
-  chk.textContent = "Kontrolle: " + VOTERS + " Zettel × " + SEATS + " Stimmen = " + (VOTERS*SEATS) +
-    ". Ausgezählt: " + t.total + (t.total === VOTERS*SEATS ? ". Stimmt." : ". Stimmt nicht.");
+  chk.textContent = "Kontrolle: " + fmt(ELECTORATE) + " Stimmberechtigte × " + SEATS +
+    " Stimmen = " + fmt(ELECTORATE*SEATS) + ". Ausgezählt: " + fmt(t.total) +
+    (t.total === ELECTORATE*SEATS ? ". Stimmt." : ". Stimmt nicht.");
   s.appendChild(chk); box.appendChild(s);
 
   /* --- 4 Verteilungszahl --- */
   s = el("div","step");
   s.innerHTML = "<div class='no'>Schritt 4</div><h2>Was ein Sitz kostet</h2>" +
-    "<div class='formula'>" + t.total + " ÷ (" + SEATS + " + 1) = " +
-    (t.total/(SEATS+1)).toFixed(2).replace(".",",") +
-    " → aufgerundet → <b>" + a.vz + "</b> Stimmen pro Sitz</div>" +
+    "<div class='formula'>" + fmt(t.total) + " ÷ (" + SEATS + " + 1) = " +
+    fmt((t.total/(SEATS+1)).toFixed(2).split(".")[0]) + "," + (t.total/(SEATS+1)).toFixed(2).split(".")[1] +
+    " → aufgerundet → <b>" + fmt(a.vz) + "</b> Stimmen pro Sitz</div>" +
     "<p class='muted small max70'>Diese Zahl heisst Verteilungszahl.</p>";
   box.appendChild(s);
 
@@ -910,17 +914,17 @@ function renderCount(){
   s.innerHTML = "<div class='no'>Schritt 5</div><h2>Sitze verteilen</h2>" +
     "<p class='muted small max70'>Parteistimmen geteilt durch die Verteilungszahl. Nachkommastellen fallen weg.</p>";
   const t5 = el("table");
-  let r5 = "<tr><th>Partei</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + a.vz +
+  let r5 = "<tr><th>Partei</th><th class='num'>Parteistimmen</th><th class='num'>÷ " + fmt(a.vz) +
     "</th><th class='num'>Sitze</th></tr>";
   const direct = {};
   LISTS.forEach(l => {
     const raw = t.party[l.id]/a.vz;
     direct[l.id] = Math.min(Math.floor(raw), l.cands.length);
-    r5 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + t.party[l.id] + "</td><td class='num'>" +
+    r5 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + fmt(t.party[l.id]) + "</td><td class='num'>" +
       raw.toFixed(2).replace(".",",") + "</td><td class='num'>" + direct[l.id] + "</td></tr>";
   });
   const dsum = Object.values(direct).reduce((x,y)=>x+y,0);
-  r5 += "<tr class='total'><td>Total</td><td class='num'>" + t.total + "</td><td></td><td class='num'>" +
+  r5 += "<tr class='total'><td>Total</td><td class='num'>" + fmt(t.total) + "</td><td></td><td class='num'>" +
     dsum + " von " + SEATS + "</td></tr>";
   t5.innerHTML = r5; s.appendChild(t5);
   box.appendChild(s);
@@ -941,7 +945,7 @@ function renderCount(){
       body += "<tr><td>" + sw(l.hex) + l.name + "</td>";
       a.log.forEach(L => {
         const has = L.snapshot[l.id], capped = has >= l.cands.length;
-        const q = capped ? "–" : (t.party[l.id]/(has+1)).toFixed(2).replace(".",",");
+        const q = capped ? "–" : fmt(Math.round(t.party[l.id]/(has+1)));
         const win = L.winner === l.id;
         body += "<td class='num'" + (win ? " style='background:#DFE3DB;font-weight:700'" : "") + ">" +
           q + (win ? " ✓" : "") + "</td>";
@@ -1009,8 +1013,8 @@ function renderResult(){
   let txt = "Am stärksten übervertreten ist " + rank[0].name + ", am stärksten untervertreten " +
     rank[rank.length-1].name + ".";
   if (out.length) txt += " Ohne Sitz " + (out.length===1 ? "bleibt " : "bleiben ") +
-    out.map(l => l.name + " mit " + t.party[l.id] + " Stimmen").join(" und ") +
-    " – nötig wären rund " + a.vz + " gewesen.";
+    out.map(l => l.name + " mit " + fmt(t.party[l.id]) + " Stimmen").join(" und ") +
+    " – nötig wären rund " + fmt(a.vz) + " gewesen.";
   s2.appendChild(Object.assign(el("p","small muted max70"), { textContent: txt }));
   box.appendChild(s2);
 
@@ -1018,11 +1022,11 @@ function renderResult(){
   s4.innerHTML = "<div class='no'>Im Klassengespräch</div><h2>Fünf Fragen</h2>";
   const ol = el("ol","qlist");
   [
-    "Jede Rolle wurde dreimal gespielt. Haben die drei Anna-Spielenden gleich gewählt? Was heisst das für Umfragen, die von der Lebenslage aufs Wahlverhalten schliessen?",
+    "Sechs Menschen standen für den ganzen Kanton. Was wäre anders herausgekommen, wenn es sechs andere gewesen wären? Wen bildet diese Auswahl nicht ab?",
     "In Schritt 2 stand: Gewählt ist nicht einfach, wer am meisten Stimmen hat. Erklärt in eigenen Worten, warum das so ist.",
     "Welche Partei hat mehr Sitzanteil als Stimmenanteil? Zeigt im Rechenweg die Stelle, an der dieser Vorteil entsteht.",
     "Wie viele zusätzliche Stimmen hätte die schwächste Partei für einen Sitz gebraucht? Rechnet es aus.",
-    "In Tannmatt leben 341 800 Menschen, aber nur 236 400 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?"
+    "In Tannmatt leben 341 800 Menschen, aber nur 236 406 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?"
   ].forEach(q => { const li = el("li"); li.textContent = q; ol.appendChild(li); });
   s4.appendChild(ol); box.appendChild(s4);
 
@@ -1035,10 +1039,9 @@ function renderResult(){
 
   const meth = el("div","notice");
   meth.innerHTML = "<b>Zur Genauigkeit:</b> Der Kanton Tannmatt und alle einundzwanzig Kandidierenden " +
-    "sind erfunden. Die fünf Parteien sind real, ihre Kurzprofile stark vereinfacht. Gerechnet wird " +
-    "nach dem Hagenbach-Bischoff-Verfahren der Nationalratswahl; nicht abgebildet sind " +
-    "Listenverbindungen, Unterlistenverbindungen und ungültige Stimmzettel. Weitere Parteien wie die " +
-    "GLP oder die EVP treten hier nicht an.";
+    "sind erfunden, die fünf Parteien sind real. Gerechnet wird nach dem Hagenbach-Bischoff-Verfahren " +
+    "der Nationalratswahl; nicht abgebildet sind Listenverbindungen, Unterlistenverbindungen und " +
+    "ungültige Stimmzettel. Weitere Parteien wie die GLP oder die EVP treten hier nicht an.";
   box.appendChild(meth);
 
   const row = el("div","btn-row noprint");
