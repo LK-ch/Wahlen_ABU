@@ -223,13 +223,6 @@ details.ref[open] summary::before{content:"–"}
   border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0}
 .hidden{display:none}
 
-/* Erklärung zur Verteilungszahl */
-.warum{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0 14px}
-.warum > div{background:#F4F6F2;border:1px solid var(--rule);border-radius:2px;padding:11px 13px;
-  font-size:13.2px;line-height:1.45}
-.warum span{display:block;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:4px;
-  letter-spacing:-0.01em}
-@media (max-width:760px){ .warum{grid-template-columns:1fr;gap:9px} }
 
 @media (max-width:980px){ .posters{grid-template-columns:repeat(3,1fr)} .choose{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:860px){ .hero{grid-template-columns:1fr;gap:22px} .rolegrid{grid-template-columns:repeat(2,1fr)} }
@@ -922,21 +915,9 @@ function renderCount(){
     "<div class='formula'>" + fmt(t.total) + " ÷ (" + SEATS + " + 1) = " +
     fmt((t.total/(SEATS+1)).toFixed(2).split(".")[0]) + "," + (t.total/(SEATS+1)).toFixed(2).split(".")[1] +
     " → aufgerundet → <b>" + fmt(a.vz) + "</b> Stimmen pro Sitz</div>" +
-    "<p class='muted small max70'>Diese Zahl heisst Verteilungszahl.</p>" +
-    "<div class='notice'><b>Warum wird durch acht geteilt und nicht durch sieben?</b>" +
-    "<div class='warum'>" +
-      "<div><span>Durch 7?</span>Dann wäre ein Sitz teuer. Kaum eine Partei käme auf so viele " +
-      "Stimmen, fast alle Sitze müssten über die Restverteilung vergeben werden.</div>" +
-      "<div><span>Durch 9 oder 10?</span>Dann wäre ein Sitz so billig, dass ihn mehr als sieben " +
-      "Parteien erreichen könnten. Man müsste Sitze vergeben, die es gar nicht gibt.</div>" +
-      "<div><span>Darum 7 + 1</span>Acht Parteien können unmöglich alle mehr als einen Achtel der " +
-      "Stimmen haben – acht Achtel sind ja bereits alles. Höchstens sieben schaffen es über die " +
-      "Verteilungszahl. Genau sieben Sitze sind zu vergeben.</div>" +
-    "</div>" +
-    "<b style='display:block;margin-top:4px'>Dasselbe mit kleinen Zahlen</b>" +
-    "80 Stimmen, 7 Sitze. 80 ÷ 8 = 10, aufgerundet kostet ein Sitz also 11 Stimmen. Eine Partei mit " +
-    "33 Stimmen bekommt damit sofort 3 Sitze. Würde man durch 7 teilen, käme ein Sitz auf 12 Stimmen " +
-    "– dieselbe Partei bekäme nur 2, obwohl ihr mehr als 40 Prozent aller Stimmen gehören.</div>";
+    "<p class='muted small max70'>Geteilt wird nicht durch die " + SEATS + " Sitze, sondern durch " +
+    (SEATS+1) + " – also durch die Zahl der Sitze plus eins. Das Ergebnis heisst Verteilungszahl " +
+    "und ist der Preis für einen Sitz.</p>";
   box.appendChild(s);
 
   /* --- 5 direkte Sitze --- */
