@@ -138,6 +138,7 @@ th{background:#DFE3DB;font-weight:700}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr.total td{background:#DFE3DB;font-weight:700}
 tr.win td{background:#F3F6F0;font-weight:700}
+.sub{display:block;font-size:11.5px;font-weight:400;color:var(--muted);line-height:1.3;margin-top:1px}
 .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;background:var(--c)}
 
 .step{border-top:2px solid var(--ink);padding-top:17px;margin-top:34px}
@@ -317,46 +318,47 @@ tr.win td{background:#F3F6F0;font-weight:700}
    Alle Kandidierenden sind erfunden.
    ========================================================== */
 const LISTS = [
+/* Kandidierende: [Name, Alter, Beruf, Wohnort] */
   { id:"SP", name:"SP", full:"Sozialdemokratische Partei", hex:"#C60C30",
     tag:"Sozialer Ausgleich, tiefere Krankenkassenprämien, bezahlbares Wohnen, Gleichstellung, Klimaschutz.",
     cands:[
-      ["Amina Tesfay","34, Primarlehrerin, Tannmatt"],
-      ["Reto Zurbriggen","51, Maurer und Gewerkschafter, Hasental"],
-      ["Luana Fernandes","28, Pflegefachfrau, Tannmatt"],
-      ["Céline Jaquier","39, Sozialarbeiterin, Val-Riond"],
-      ["Marco De Luca","62, Rentner, früher Papierfabrik"]
+      ["Amina Tesfay",       34, "Primarlehrerin",            "Tannmatt"],
+      ["Reto Zurbriggen",    51, "Maurer und Gewerkschafter", "Hasental"],
+      ["Luana Fernandes",    28, "Pflegefachfrau",            "Tannmatt"],
+      ["Céline Jaquier",     39, "Sozialarbeiterin",          "Val-Riond"],
+      ["Marco De Luca",      62, "Rentner, früher Papierfabrik", "Riedern"]
     ]},
   { id:"GPS", name:"Grüne", full:"Grüne Partei der Schweiz", hex:"#6F8C10",
     tag:"Klima- und Umweltschutz, Biodiversität, Verkehrswende, Schutz von Landschaft und Boden.",
     cands:[
-      ["Nuray Öztürk","33, Biologin, Val-Riond"],
-      ["Noah Gerber","24, Student der Umweltwissenschaften"],
-      ["Fatima Ahmadi","29, Velomechanikerin, Riedern"]
+      ["Nuray Öztürk",       33, "Biologin",                  "Val-Riond"],
+      ["Noah Gerber",        24, "Student Umweltwissenschaften", "Tannmatt"],
+      ["Fatima Ahmadi",      29, "Velomechanikerin",          "Riedern"]
     ]},
   { id:"MIT", name:"Mitte", full:"Die Mitte", hex:"#C1611A",
     tag:"Ausgleich zwischen den Polen, Familien, Sicherung von AHV und Krankenversicherung, Service public in den Regionen.",
     cands:[
-      ["Priya Rajeswaran","36, Zahnärztin, Tannmatt"],
-      ["Andreas Hodel","49, Landwirt, Hasental"],
-      ["Chantal Marchon","44, Spitex-Leiterin, Val-Riond"],
-      ["Ivan Bernasconi","55, Gemeindepräsident, Riedern"]
+      ["Priya Rajeswaran",   36, "Zahnärztin",                "Tannmatt"],
+      ["Andreas Hodel",      49, "Landwirt",                  "Hasental"],
+      ["Chantal Marchon",    44, "Spitex-Leiterin",           "Val-Riond"],
+      ["Ivan Bernasconi",    55, "Gemeindepräsident",         "Riedern"]
     ]},
   { id:"FDP", name:"FDP", full:"FDP.Die Liberalen", hex:"#0E52A0",
     tag:"Unternehmertum und Gewerbe, weniger Regulierung, gesunde Bundesfinanzen, individuelle Verantwortung.",
     cands:[
-      ["Beatrice von Gunten","57, Treuhänderin, Tannmatt"],
-      ["Sandra Iten","30, Software-Unternehmerin, Tannmatt"],
-      ["Jean-Marc Nicolet","63, Hotelier, Val-Riond"],
-      ["Kilian Reber","41, Rechtsanwalt, Tannmatt"]
+      ["Beatrice von Gunten",57, "Treuhänderin",              "Tannmatt"],
+      ["Sandra Iten",        30, "Software-Unternehmerin",    "Tannmatt"],
+      ["Jean-Marc Nicolet",  63, "Hotelier",                  "Val-Riond"],
+      ["Kilian Reber",       41, "Rechtsanwalt",              "Tannmatt"]
     ]},
   { id:"SVP", name:"SVP", full:"Schweizerische Volkspartei", hex:"#2F6B37",
     tag:"Begrenzung der Zuwanderung, Unabhängigkeit gegenüber der EU, tiefe Steuern und Abgaben, starke Landwirtschaft.",
     cands:[
-      ["Driton Krasniqi","41, Bauunternehmer, Riedern"],
-      ["Ueli Stampfli","58, Landwirt und Metzger, Hasental"],
-      ["Karin Hofstetter","47, Gärtnereibetrieb, Riedern"],
-      ["Bruno Zwahlen","52, Transportunternehmer, Tannmatt"],
-      ["Sven Lüthi","35, Polizist, Val-Riond"]
+      ["Driton Krasniqi",    41, "Bauunternehmer",            "Riedern"],
+      ["Ueli Stampfli",      58, "Landwirt und Metzger",      "Hasental"],
+      ["Karin Hofstetter",   47, "Gärtnereibetrieb",          "Riedern"],
+      ["Bruno Zwahlen",      52, "Transportunternehmer",      "Tannmatt"],
+      ["Sven Lüthi",         35, "Polizist",                  "Val-Riond"]
     ]}
 ];
 
@@ -377,9 +379,14 @@ const SEATS  = 7;
    Grössenverhältnissen orientiert, ohne Anspruch auf Genauigkeit. */
 const WEIGHTS = [["SVP",.30],["SP",.21],["MIT",.17],["FDP",.17],["GPS",.15]];
 
+/* short = "34, Primarlehrerin"   job = "34, Primarlehrerin, Tannmatt" */
+const shortOf = c => c[1] + ", " + c[2];
+const jobOf   = c => c[1] + ", " + c[2] + ", " + c[3];
+
 const CANDS = [];
 LISTS.forEach(l => l.cands.forEach((c,i) => CANDS.push({
-  code:l.id+(i+1), name:c[0], job:c[1], list:l.id })));
+  code:l.id+(i+1), name:c[0], age:c[1], beruf:c[2], ort:c[3],
+  short:shortOf(c), job:jobOf(c), list:l.id })));
 const candBy = c => CANDS.find(x => x.code === c);
 const listBy = id => LISTS.find(l => l.id === id);
 const roleAt = i => ({ role:ROLES[i % ROLES.length], nr:(i % ROLES.length)+1,
@@ -411,7 +418,7 @@ function renderPosters(){
     const ul = el("ul");
     l.cands.forEach((c,i) => {
       const li2 = el("li");
-      li2.innerHTML = "<b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + c[1] + "</i>";
+      li2.innerHTML = "<b>" + l.id + (i+1) + "</b>" + c[0] + "<i>" + jobOf(c) + "</i>";
       ul.appendChild(li2);
     });
     body.appendChild(ul); p.appendChild(body); box.appendChild(p);
@@ -508,7 +515,7 @@ function renderBallot(){
       ll.cands.forEach((c,k) => {
         const o = el("option");
         o.value = ll.id+(k+1);
-        o.textContent = c[0] + "  (" + ll.id+(k+1) + ")";
+        o.textContent = c[0] + " — " + shortOf(c) + "  (" + ll.id+(k+1) + ")";
         og.appendChild(o);
       });
       sel.appendChild(og);
@@ -632,7 +639,8 @@ function allocate(party, seats){
 }
 function rankedOf(listId, candVotes){
   const l = listBy(listId);
-  const arr = l.cands.map((c,i) => ({ code:l.id+(i+1), name:c[0], job:c[1], list:l.id,
+  const arr = l.cands.map((c,i) => ({ code:l.id+(i+1), name:c[0], age:c[1], beruf:c[2], ort:c[3],
+                                      short:shortOf(c), job:jobOf(c), list:l.id,
                                       v:candVotes[l.id+(i+1)] }));
   for (let i = arr.length-1; i > 0; i--){
     const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]] = [arr[j],arr[i]];
@@ -701,7 +709,7 @@ function renderCount(){
     ranked[l.id].forEach(c => {
       const win = elected.some(e => e.code === c.code);
       r += "<tr" + (win ? " class='win'" : "") + "><td>" + c.name + (win ? " ✓" : "") +
-        "</td><td class='num'>" + c.v + "</td></tr>";
+        "<span class='sub'>" + c.short + "</span></td><td class='num'>" + c.v + "</td></tr>";
     });
     tab.innerHTML = r; g.appendChild(tab);
   });
@@ -729,8 +737,8 @@ function renderCount(){
   s.appendChild(wrap);
 
   /* Vergleich: die sieben stimmenstärksten Personen überhaupt */
-  const alle = CANDS.map(c => ({ code:c.code, name:c.name, list:c.list, v:t.candVotes[c.code] }))
-                    .sort((x,y) => y.v - x.v);
+  const alle = CANDS.map(c => ({ code:c.code, name:c.name, short:c.short, list:c.list,
+                                 v:t.candVotes[c.code] })).sort((x,y) => y.v - x.v);
   const top7 = alle.slice(0,SEATS);
   const anders = top7.filter(c => !elected.some(e => e.code === c.code));
   const nv = el("div","notice");
@@ -738,7 +746,8 @@ function renderCount(){
     nv.innerHTML = "<b>Achtung, hier wird es interessant.</b> Gewählt sind nicht einfach die sieben " +
       "Personen mit den meisten Stimmen. " + anders.length +
       (anders.length === 1 ? " Person hätte" : " Personen hätten") + " es sonst geschafft: " +
-      anders.map(c => c.name + " (" + listBy(c.list).name + ", " + c.v + ")").join(", ") +
+      anders.map(c => c.name + " (" + c.short + ", " + listBy(c.list).name + ", " + c.v +
+                      " Stimmen)").join("; ") +
       ". Zuerst werden nämlich die Sitze auf die Parteien verteilt, erst danach zählen die " +
       "Personen. Wie das geht, steht in den Schritten 3 bis 6.";
   } else {
@@ -844,7 +853,9 @@ function renderCount(){
   const t7 = el("table");
   let r7 = "<tr><th>Partei</th><th class='num'>Sitze</th><th>Gewählt</th></tr>";
   LISTS.forEach(l => {
-    const namen = elected.filter(e => e.list === l.id).map(e => e.name).join(", ");
+    const namen = elected.filter(e => e.list === l.id)
+      .map(e => "<div style='padding:2px 0'>" + e.name + "<span class='sub'>" + e.short +
+                "</span></div>").join("");
     r7 += "<tr><td>" + sw(l.hex) + l.name + "</td><td class='num'>" + a.got[l.id] + "</td><td>" +
       (namen || "<span class='muted'>keine Sitze</span>") + "</td></tr>";
   });
