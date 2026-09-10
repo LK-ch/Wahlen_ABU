@@ -23,7 +23,7 @@ body{
   font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
   font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:1060px;margin:0 auto;padding:0 20px 100px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px 100px}
 h1,h2,h3{margin:0;font-weight:700;letter-spacing:-0.025em}
 h1{font-size:clamp(38px,7.5vw,76px);line-height:.96;letter-spacing:-0.045em}
 h2{font-size:clamp(22px,3.2vw,30px);line-height:1.12;margin-bottom:8px}
@@ -63,14 +63,15 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
 .facts b{font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
 
 .anna{background:var(--sheet);border:1px solid var(--rule);border-left:6px solid var(--ink);
-  padding:20px 24px;margin:34px 0 8px;border-radius:2px;max-width:74ch}
+  padding:22px 26px;margin:34px 0 8px;border-radius:2px}
 .anna h3{margin-bottom:6px}
 
 /* Parteikarten */
 .posters{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-top:20px}
 .poster{border-radius:2px;overflow:hidden;border:1px solid var(--rule);background:var(--sheet);
   display:flex;flex-direction:column}
-.poster .top{background:var(--c);color:#fff;padding:15px 15px 16px}
+.poster .top{background:var(--c);color:#fff;padding:15px 15px 16px;min-height:104px;
+  display:flex;flex-direction:column}
 .poster .abbr{font-size:clamp(24px,3vw,31px);font-weight:700;letter-spacing:-0.04em;line-height:1}
 .poster .full{font-size:11.5px;line-height:1.3;margin-top:5px;opacity:.92}
 .poster .body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
@@ -103,7 +104,7 @@ button{font:inherit;color:inherit;cursor:pointer;border-radius:2px}
 .role{background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
   display:flex;gap:18px;align-items:center;padding:18px 22px;margin-bottom:22px}
 .role .who{font-size:20px;font-weight:700;letter-spacing:-0.02em}
-.role .bio{font-size:14.5px;color:var(--muted);line-height:1.4;max-width:62ch}
+.role .bio{font-size:14.5px;color:var(--muted);line-height:1.4}
 
 .choose{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin:14px 0 6px}
 .choose button{background:var(--sheet);border:1.5px solid var(--rule);border-top:7px solid var(--c);
@@ -219,7 +220,7 @@ details.ref[open] summary::before{content:"–"}
   color:var(--muted);font-variant-numeric:tabular-nums}
 
 .notice{border:1.5px solid var(--rule-strong);background:var(--sheet);padding:14px 17px;
-  border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0;max-width:76ch}
+  border-radius:2px;font-size:14px;line-height:1.55;margin:15px 0}
 .hidden{display:none}
 
 @media (max-width:980px){ .posters{grid-template-columns:repeat(3,1fr)} .choose{grid-template-columns:repeat(3,1fr)} }
@@ -854,24 +855,30 @@ function renderCount(){
   });
   s.appendChild(wrap);
 
-  /* Vergleich: die sieben stimmenstärksten Personen überhaupt */
-  const alle = CANDS.map(c => ({ code:c.code, name:c.name, short:c.short, list:c.list,
-                                 v:t.candVotes[c.code] })).sort((x,y) => y.v - x.v);
-  const top7 = alle.slice(0,SEATS);
-  const anders = top7.filter(c => !elected.some(e => e.code === c.code));
+  /* Wer hat mehr Stimmen als die schwächste gewählte Person, sitzt aber nicht im Rat? */
+  const schwaechste = elected.reduce((a,b) => b.v < a.v ? b : a);
+  const uebergangen = CANDS
+    .map(c => ({ code:c.code, name:c.name, short:c.short, list:c.list, v:t.candVotes[c.code] }))
+    .filter(c => c.v > schwaechste.v && !elected.some(e => e.code === c.code))
+    .sort((x,y) => y.v - x.v);
+
   const nv = el("div","notice");
-  if (anders.length){
-    nv.innerHTML = "<b>Achtung, hier wird es interessant.</b> Gewählt sind nicht einfach die sieben " +
-      "Personen mit den meisten Stimmen. " + anders.length +
-      (anders.length === 1 ? " Person hätte" : " Personen hätten") + " es sonst geschafft: " +
-      anders.map(c => c.name + " (" + c.short + ", " + listBy(c.list).name + ", " + fmt(c.v) +
-                      " Stimmen)").join("; ") +
-      ". Zuerst werden nämlich die Sitze auf die Parteien verteilt, erst danach zählen die " +
+  if (uebergangen.length){
+    nv.innerHTML = "<b>Achtung, hier wird es interessant.</b> Gewählt ist nicht einfach, wer am " +
+      "meisten Stimmen hat. " + schwaechste.name + " (" + listBy(schwaechste.list).name + ") zieht " +
+      "mit " + fmt(schwaechste.v) + " Stimmen in den Nationalrat ein. " +
+      (uebergangen.length === 1 ? "Diese Person hat mehr Stimmen und bleibt trotzdem draussen: "
+                                : "Diese " + uebergangen.length + " Personen haben mehr Stimmen und " +
+                                  "bleiben trotzdem draussen: ") +
+      uebergangen.map(c => c.name + " (" + listBy(c.list).name + ", " + fmt(c.v) + ")").join("; ") +
+      ". Der Grund: Zuerst werden die Sitze auf die Parteien verteilt, erst danach zählen die " +
       "Personen. Wie das geht, steht in den Schritten 3 bis 6.";
   } else {
-    nv.innerHTML = "<b>Zufall dieser Runde:</b> Diesmal sind es genau die sieben Personen mit den " +
-      "meisten Stimmen. Das muss nicht so sein – zuerst werden die Sitze auf die Parteien verteilt, " +
-      "erst danach zählen die Personen. Wie das geht, steht in den Schritten 3 bis 6.";
+    nv.innerHTML = "<b>Diesmal ohne Überraschung.</b> Niemand ausserhalb des Rats hat mehr Stimmen " +
+      "als " + schwaechste.name + " (" + listBy(schwaechste.list).name + ", " + fmt(schwaechste.v) +
+      " Stimmen), die am knappsten gewählte Person. Das ist nicht selbstverständlich: Zuerst werden " +
+      "die Sitze auf die Parteien verteilt, erst danach zählen die Personen. Wie das geht, steht in " +
+      "den Schritten 3 bis 6.";
   }
   s.appendChild(nv);
   box.appendChild(s);
@@ -1017,18 +1024,6 @@ function renderResult(){
     " – nötig wären rund " + fmt(a.vz) + " gewesen.";
   s2.appendChild(Object.assign(el("p","small muted max70"), { textContent: txt }));
   box.appendChild(s2);
-
-  const s4 = el("div","step");
-  s4.innerHTML = "<div class='no'>Im Klassengespräch</div><h2>Fünf Fragen</h2>";
-  const ol = el("ol","qlist");
-  [
-    "Sechs Menschen standen für den ganzen Kanton. Was wäre anders herausgekommen, wenn es sechs andere gewesen wären? Wen bildet diese Auswahl nicht ab?",
-    "In Schritt 2 stand: Gewählt ist nicht einfach, wer am meisten Stimmen hat. Erklärt in eigenen Worten, warum das so ist.",
-    "Welche Partei hat mehr Sitzanteil als Stimmenanteil? Zeigt im Rechenweg die Stelle, an der dieser Vorteil entsteht.",
-    "Wie viele zusätzliche Stimmen hätte die schwächste Partei für einen Sitz gebraucht? Rechnet es aus.",
-    "In Tannmatt leben 341 800 Menschen, aber nur 236 406 dürfen wählen. Wer fehlt, und was bedeutet das für die Frage, wen der Nationalrat vertritt?"
-  ].forEach(q => { const li = el("li"); li.textContent = q; ol.appendChild(li); });
-  s4.appendChild(ol); box.appendChild(s4);
 
   if (lotUsed){
     const l = el("div","notice");
